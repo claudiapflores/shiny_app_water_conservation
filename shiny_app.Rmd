@@ -25,7 +25,8 @@ water_supplier <- read_csv("Water_Districts.csv")
 ```
 
 ```{r}
-
+water_supplier_clean <- water_supplier %>% 
+  clean_names()
 ```
 
 
