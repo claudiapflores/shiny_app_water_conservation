@@ -16,6 +16,11 @@ library(tidyr)
 library(janitor)
 ```
 
+To do:
+1.) Clean data
+2.) Merge data together and add GIS data
+3.) Set up UI and Server for app, create app.R file, Select theme and type
+4.) Start working on widgets 
 
 ```{r}
 # Load in data. 
