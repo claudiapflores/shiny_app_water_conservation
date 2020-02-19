@@ -12,12 +12,39 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 # Load in packages. 
 library(tidyverse)
+library(tidyr) 
+library(janitor)
 ```
 
 
 ```{r}
 # Load in data. 
-water_conservation <- read_csv("uw_supplier_data010720.csv")
+water_conservation <- read_csv("uw_supplier_data010720.csv") %>% 
+  clean_names()
 water_supplier <- read_csv("Water_Districts.csv")
 ```
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
