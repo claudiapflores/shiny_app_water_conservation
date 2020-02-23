@@ -16,6 +16,7 @@ library(tidyr)
 library(janitor)
 library(prodlim)
 library(dplyr)
+library(stringr)
 ```
 
 To do:
@@ -38,6 +39,13 @@ water_supplier_clean <- water_supplier %>%
 # Rename agencyname column in water_supplier dataframe to supplier_name.
 water_supplier_clean <- water_supplier_clean %>%
   dplyr::rename(supplier_name = agencyname)
+
+# Remove white spaces in and from both sides of text for supplier_name column in both datafames.
+#water_supplier_clean <- water_supplier_clean %>% 
+  #stringr::str_squish(water_supplier_clean$supplier_name)
+
+#water_conservation <- water_conservation %>% 
+  #str_squish(water_conservation$supplier_name)
 
 # Merge datasets.
 water_merged <- merge(water_conservation,water_supplier_clean, by = "supplier_name")
