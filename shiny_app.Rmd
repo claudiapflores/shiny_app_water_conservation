@@ -18,6 +18,15 @@ library(prodlim)
 library(dplyr)
 ```
 
+<<<<<<< HEAD
+=======
+To do:
+1.) Clean data
+2.) Merge data together and add GIS data
+3.) Set up UI and Server for app, create app.R file, Select theme and type
+4.) Start working on widgets 
+
+>>>>>>> 79cfc1859afa20932a1384916919fffbba0a8f25
 ```{r}
 # Load in data and format column names.
 water_conservation <- read_csv("uw_supplier_data010720.csv") %>% 
