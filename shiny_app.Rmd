@@ -40,7 +40,8 @@ water_supplier_clean <- water_supplier_clean %>%
   dplyr::rename(supplier_name = agencyname)
 
 # Merge datasets.
-water_merged <- merge(water_conservation,water_supplier_clean,by = "supplier_name")
+water_merged <- merge(water_conservation,water_supplier_clean, by = "supplier_name")
+
 
 
 # Check number of unique observations in water_conservation dataframe supplier_name column.
