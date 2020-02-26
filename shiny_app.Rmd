@@ -41,24 +41,23 @@ water_supplier_clean <- water_supplier_clean %>%
   dplyr::rename(supplier_name = agencyname)
 
 # Remove white spaces in and from both sides of text for supplier_name column in both datafames.
-#water_supplier_clean <- water_supplier_clean %>% 
-  #stringr::str_squish(water_supplier_clean$supplier_name)
+water_supplier_clean <- water_supplier_clean %>% 
+  mutate(supplier_name = stringr::str_squish(supplier_name)) %>% 
+  mutate(supplier_name = stringr::str_to_title(supplier_name))
 
-#water_conservation <- water_conservation %>% 
-  #str_squish(water_conservation$supplier_name)
+water_conservation <- water_conservation %>% 
+  mutate(supplier_name = stringr::str_squish(supplier_name)) %>% 
+  mutate(supplier_name = stringr::str_to_title(supplier_name))
 
 # Merge datasets.
 water_merged <- merge(water_conservation,water_supplier_clean, by = "supplier_name")
-
-
 
 # Check number of unique observations in water_conservation dataframe supplier_name column.
 water_conservation_dup <- water_conservation %>% 
   distinct(supplier_name)
 
 # See what observations cannot be matched in water_merged from water_conservation and water_supplier dataframes.
-missing_data <- anti_join(water_supplier_clean, water_conservation_dup, by = "supplier_name")
-
+missing_data <- anti_join(water_supplier_clean, water_conservation, by = "supplier_name")
 
 ```
 
