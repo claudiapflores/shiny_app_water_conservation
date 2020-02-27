@@ -27,7 +27,16 @@ ui <- dashboardPage(
     tabItems(
       tabItem(
         tabName = "supplier",
-        selectInput(inputId = "supplier", label = "Water Supplier", choices = c(unique(water_conservation_dup$supplier_name)))
+        h2("California Water Suppliers by Name and Location"),
+        selectInput(inputId = "supplier", label = "Municipality", choices = c(unique(water_conservation_dup$supplier_name)))
+      ),
+      tabItem(
+        tabName = "Info",
+        h2("Application and Data Information")
+      ),
+      tabItem(
+        tabName = "Reports",
+        h2("Water Misuse Reports, Follow-ups, and Warnings")
       )
     )
   )
