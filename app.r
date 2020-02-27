@@ -1,6 +1,10 @@
 ## Load Packages
 
 # library(tidyverse)
+library(shiny)
+library(shinydashboard)
+library(devtools)
+library(shinyWidgets)
 # library(shiny)
 # library(shinydashboard)
 # library(leaflet)
@@ -17,12 +21,18 @@ ui <- dashboardPage(
                   titleWidth = 600),
   dashboardSidebar(
     sidebarMenu(
+      sliderTextInput(
+        inputId = "mySliderText",
+        label = "Month range slider:",
+        choices = month.name,
+        selected = month.name[c(4, 7)]),
+      
       menuItem("User Information", tabName = "Info", icon = icon("book-reader")),
       menuItem("Water Suppliers", tabName = "supplier", icon = icon("tint")),
       menuItem("Reports", tabName = "Reports", icon = icon("exclamation"))
       # menuItem(whatever other tabs we might want)
-      )
-    ),
+    )
+  ),
   dashboardBody(
     tabItems(
       tabItem(
@@ -43,7 +53,7 @@ ui <- dashboardPage(
   )
 )
 
- 
+
 
 
 
