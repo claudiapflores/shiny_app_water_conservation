@@ -36,7 +36,8 @@ ui <- dashboardPage(
       ),
       tabItem(
         tabName = "Reports",
-        h2("Water Misuse Reports, Follow-ups, and Warnings")
+        h2("Water Misuse Reports, Follow-ups, and Warnings"),
+        radioButtons(inputId = "reports", label = "Oversight", choices = c("Reported", "Warning Issued", "Follow-up"))
       )
     )
   )
