@@ -12,7 +12,6 @@ library(shinyWidgets)
 # library(tmaptools)
 # library(kableExtra)
 
-# Read in data... not yet, waiting for finalized/wrangled data with spatial
 
 ### User Interface
 
@@ -26,7 +25,6 @@ ui <- dashboardPage(
         label = "Month range slider:",
         choices = month.name,
         selected = month.name[c(4, 7)]),
-      
       menuItem("User Information", tabName = "Info", icon = icon("book-reader")),
       menuItem("Water Suppliers", tabName = "supplier", icon = icon("tint")),
       menuItem("Reports", tabName = "Reports", icon = icon("exclamation"))
