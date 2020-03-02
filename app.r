@@ -5,6 +5,7 @@ library(shiny)
 library(shinydashboard)
 library(devtools)
 library(shinyWidgets)
+library(shinythemes)
 # library(shiny)
 # library(shinydashboard)
 # library(leaflet)
@@ -15,52 +16,39 @@ library(shinyWidgets)
 
 ### User Interface
 
-ui <- dashboardPage(
-  dashboardHeader(title = "Understanding California Municiple Water Supply and Use",
-                  titleWidth = 600),
-  dashboardSidebar(
-    sidebarMenu(
-      sliderTextInput(
-        inputId = "mySliderText",
-        label = "Month range slider:",
-        choices = month.name,
-        selected = month.name[c(4, 7)]),
-      menuItem("User Information", tabName = "Info", icon = icon("book-reader")),
-      menuItem("Water Suppliers", tabName = "supplier", icon = icon("tint")),
-      menuItem("Reports", tabName = "Reports", icon = icon("exclamation"))
-      # menuItem(whatever other tabs we might want)
-    )
-  ),
-  dashboardBody(
-    tabItems(
-      tabItem(
-        tabName = "supplier",
-        h2("California Water Suppliers by Name and Location"),
-        selectInput(inputId = "supplier", label = "Municipality", choices = c(unique(water_conservation_dup$supplier_name)))
-      ),
-      tabItem(
-        tabName = "Info",
-        h2("Application and Data Information")
-      ),
-      tabItem(
-        tabName = "Reports",
-        h2("Water Misuse Reports, Follow-ups, and Warnings"),
-        radioButtons(inputId = "reports", label = "Oversight", choices = c("Reported", "Warning Issued", "Follow-up"))
-      )
+ui <- fluidPage(
+  theme = shinytheme("superhero"),
+  titlePanel("Understanding California Municipal Water Supply and Use"),
+  sidebarLayout(
+    sidebarPanel("",
+                 selectInput(inputId = "supplier_select",
+                             label = "Choose a Supplier:",
+                             choices = unique(water_merged$supplier_name)
+                 ),
+                 checkboxGroupInput(inputId = "reports_select",
+                                    label = "Choose one or more:",
+                                    choices = list("Reported" = 1, "Warning Issued" = 2, "Follow-Up" = 3),
+                                    selected = 1),
+                 sliderInput("slider", "Reporting Month and Year", min = as.Date("2015-04-01"),max =as.Date("2019-09-01"),value=as.Date("2019-09-01"),timeFormat="%b %Y"),
+                 textOutput("SliderText")
+    ),
+    mainPanel( tabsetPanel(
+      tabPanel("Water Supplier Results"),
+      tabPanel("User Information"),
+      tabPanel("Background"),
+      tabPanel("Data")
+    ),
+              p("State of California:"),
+              tableOutput(outputId = "candy_table"),
+              p(""),
+              plotOutput(outputId = "costume_graph"),
     )
   )
 )
-
-
-
-
-
-
-
-
-
-
-
+  
+  
+  
+  
 server <- function(input, output) {}
 
 shinyApp(ui = ui, server = server)
