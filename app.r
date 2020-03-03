@@ -65,7 +65,7 @@ server <- function(input, output) {
   # reactive map
   output$water_map <- renderPlot({
     ggplot(data = water_reactive()) +
-      geom_sf(aes(color = supplier_name)) +
+      geom_sf(aes(fill = supplier_name), show.legend = FALSE) +
       theme_minimal()
   })
   
