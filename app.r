@@ -25,7 +25,7 @@ ui <- fluidPage(
     sidebarPanel("",
                  selectInput(inputId = "supplier_select",
                              label = "Choose a Supplier:",
-                             choices = unique(water_supplier_spatial$supplier_name)
+                             choices = unique(water_total$supplier_name)
                  ),
                  checkboxGroupInput(inputId = "reports_select",
                                     label = "Choose one or more:",
@@ -57,15 +57,16 @@ ui <- fluidPage(
 server <- function(input, output) {
   # reactive map dataframe
   water_reactive <- reactive({
-    water_supplier_spatial %>% 
-    select(supplier_name)
+    water_total %>% 
+      select(supplier_name) %>% 
+      filter(supplier_name == input$supplier_select)
   })
   
   # reactive map
-  output$water_map <- renderTmap({
-    tm_basemap("Esri.WorldImagery") +
-      tm_shape(water_reactive()) +
-      tm_fill("supplier_name")
+  output$water_map <- renderPlot({
+    ggplot(data = water_reactive()) +
+      geom_sf(aes(color = supplier_name)) +
+      theme_minimal()
   })
   
   

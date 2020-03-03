@@ -70,8 +70,10 @@ water_supplier_spatial <- read_sf(dsn = here("spatial_data"), layer = "Water_Dis
   mutate(supplier_name = stringr::str_to_title(supplier_name))
 
 # Water supplier spatial data with water conservation
-water_total <-  merge(water_conservation,water_supplier_spatial, by = "supplier_name")
-  
+water_total <-  merge(water_conservation,water_supplier_spatial, by = "supplier_name") %>% 
+  st_as_sf() 
+
+
 ```
 
 
