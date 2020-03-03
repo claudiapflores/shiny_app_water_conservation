@@ -59,6 +59,8 @@ water_conservation_dup <- water_conservation %>%
 # See what observations cannot be matched in water_merged from water_conservation and water_supplier dataframes.
 missing_data <- anti_join(water_supplier_clean, water_conservation, by = "supplier_name")
 
+# water_spatial <- 
+
 ```
 
 

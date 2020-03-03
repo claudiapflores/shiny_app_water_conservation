@@ -1,6 +1,6 @@
 ## Load Packages
 
-# library(tidyverse)
+library(tidyverse)
 library(shiny)
 library(shinydashboard)
 library(devtools)
@@ -8,9 +8,11 @@ library(shinyWidgets)
 library(shinythemes)
 # library(shiny)
 # library(shinydashboard)
-# library(leaflet)
-# library(tmap)
-# library(tmaptools)
+library(leaflet)
+library(tmap)
+library(tmaptools)
+library(mapview)
+library(sf)
 # library(kableExtra)
 
 
@@ -49,6 +51,14 @@ ui <- fluidPage(
   
   
   
-server <- function(input, output) {}
+server <- function(input, output) {
+  # reactive map dataframe
+  
+  
+  
+  
+  
+  
+}
 
 shinyApp(ui = ui, server = server)
