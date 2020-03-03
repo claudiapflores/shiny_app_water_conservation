@@ -25,7 +25,7 @@ ui <- fluidPage(
     sidebarPanel("",
                  selectInput(inputId = "supplier_select",
                              label = "Choose a Supplier:",
-                             choices = unique(water_merged$supplier_name)
+                             choices = unique(water_supplier_spatial$supplier_name)
                  ),
                  checkboxGroupInput(inputId = "reports_select",
                                     label = "Choose one or more:",
@@ -35,15 +35,18 @@ ui <- fluidPage(
                  textOutput("SliderText")
     ),
     mainPanel( tabsetPanel(
-      tabPanel("Water Supplier Results"),
+      tabPanel("Water Supplier Results",
+               p("Map of California Water Suppliers:"),
+               plotOutput(outputId = "water_map"),
+               p("Other Outputs")),
       tabPanel("User Information"),
       tabPanel("Background"),
       tabPanel("Data")
     ),
-              p("State of California:"),
-              tableOutput(outputId = "candy_table"),
-              p(""),
-              plotOutput(outputId = "costume_graph"),
+              #p(""),
+              #plotOutput(outputId = "water_map"),
+              #p(""),
+              #plotOutput(outputId = "water_map"),
     )
   )
 )
@@ -53,7 +56,17 @@ ui <- fluidPage(
   
 server <- function(input, output) {
   # reactive map dataframe
+  water_reactive <- reactive({
+    water_supplier_spatial %>% 
+    select(supplier_name)
+  })
   
+  # reactive map
+  output$water_map <- renderTmap({
+    tm_basemap("Esri.WorldImagery") +
+      tm_shape(water_reactive()) +
+      tm_fill("supplier_name")
+  })
   
   
   

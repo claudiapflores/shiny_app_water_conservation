@@ -17,6 +17,8 @@ library(janitor)
 library(prodlim)
 library(dplyr)
 library(stringr)
+library(sf)
+library(here)
 ```
 
 To do:
@@ -59,8 +61,17 @@ water_conservation_dup <- water_conservation %>%
 # See what observations cannot be matched in water_merged from water_conservation and water_supplier dataframes.
 missing_data <- anti_join(water_supplier_clean, water_conservation, by = "supplier_name")
 
-# water_spatial <- 
+# Water supplier data with proper shapefiles
+water_supplier_spatial <- read_sf(dsn = here("spatial_data"), layer = "Water_Districts") %>% 
+  clean_names() %>% 
+  select(agencyname) %>% 
+  dplyr::rename(supplier_name = agencyname) %>% 
+  mutate(supplier_name = stringr::str_squish(supplier_name)) %>% 
+  mutate(supplier_name = stringr::str_to_title(supplier_name))
 
+# Water supplier spatial data with water conservation
+water_total <-  merge(water_conservation,water_supplier_spatial, by = "supplier_name")
+  
 ```
 
 
