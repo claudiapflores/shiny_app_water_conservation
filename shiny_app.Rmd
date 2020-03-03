@@ -73,6 +73,12 @@ water_supplier_spatial <- read_sf(dsn = here("spatial_data"), layer = "Water_Dis
 water_total <-  merge(water_conservation,water_supplier_spatial, by = "supplier_name") %>% 
   st_as_sf() 
 
+# Read in ca_counties spatial data
+
+ca_counties <- read_sf(dsn = here("CA_Counties"), layer = "CA_Counties_TIGER2016") %>%
+  st_transform(crs = 4326) %>% 
+  select(NAME)
+
 
 ```
 
