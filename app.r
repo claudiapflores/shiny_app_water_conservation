@@ -38,7 +38,7 @@ ui <- fluidPage(
     mainPanel( tabsetPanel(
       tabPanel("Water Supplier Results",
                p("Map of California Water Suppliers:"),
-               tmapOutput(outputId = "water_map"),
+               leafletOutput(outputId = "water_map"),
                p("Other Outputs")),
       tabPanel("User Information", htmlOutput("tab1")),
       tabPanel("Background", htmlOutput("tab2")),
@@ -70,7 +70,7 @@ server <- function(input, output) {
     
     # tmap_mode("view")
     map <- tm_basemap("Hydda.Base") +
-      tm_shape(water_reactive) +
+      tm_shape(water_reactive()) +
       tm_fill("supplier_name")
     
     tmap_leaflet(map)
@@ -79,10 +79,11 @@ server <- function(input, output) {
   
   # reactive for date
   date <- reactive({ water_merged %>% 
-      select(reporting_month)
+      select(reporting_month) %>% 
+      filter(reporting_month == input$slider2)
   })
   
-  output$slider2 <- renderPrint({ input$date })
+  output$datetable <- renderTable({ input$date })
   
   # text for tabs
   {
