@@ -37,7 +37,7 @@ ui <- fluidPage(
     mainPanel( tabsetPanel(
       tabPanel("Water Supplier Results",
                p("Map of California Water Suppliers:"),
-               plotOutput(outputId = "water_map"),
+               tmapOutput(outputId = "water_map"),
                p("Other Outputs")),
       tabPanel("User Information"),
       tabPanel("Background"),
@@ -63,11 +63,17 @@ server <- function(input, output) {
   })
   
   # reactive map
-  output$water_map <- renderPlot({
-    ggplot() +
-      geom_sf(data = water_reactive(), aes(fill = supplier_name), show.legend = FALSE) +
-      geom_sf(data = ca_counties, alpha = 0.2) +
-      theme_minimal()
+
+  
+  output$water_map <- renderLeaflet({
+    
+    # tmap_mode("view")
+    map <- tm_basemap("Hydda.Base") +
+      tm_shape(water_reactive) +
+      tm_fill("supplier_name")
+    
+    tmap_leaflet(map)
+    
   })
   
   
