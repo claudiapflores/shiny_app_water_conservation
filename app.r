@@ -87,20 +87,28 @@ server <- function(input, output) {
       "this is text2"
     })
     output$tab3 <- renderText({paste(
-      "The water conservation data used for this project is from the California State Water Resources Control Board and the spatial data is from the California Department of Water Resources. The California State Water Resources Control Board collected data from June 2014 to November 2019 from 409 municipalities. All conversions for the conservation data were completed by the State Water Board and can be viewed here
-<a>https://www.waterboards.ca.gov/waterrights/water_issues/programs/drought/docs/ws_tools/guidance_estimate_res_gpcd.pdf</a>
+      "The water conservation data used for this project is from the California State Water Resources Control Board and the spatial data is from the California Department of Water Resources. The California State Water Resources Control Board collected data from June 2014 to November 2019 from 409 municipalities. All conversions for the conservation data were completed by the State Water Board and can be viewed
+<a href='https://www.waterboards.ca.gov/waterrights/water_issues/programs/drought/docs/ws_tools/guidance_estimate_res_gpcd.pdf' onclick='detect_click(this)'>here.</a>
 <br>
 <br>
 <b>   
 Raw datasets and metadata: </b><br>
-- Water Conservation<br>
-- Metadata (Water Conservation)<br>
-- Water Districts (Spatial)<br>
+- <a href='https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/conservation_reporting.html' onclick='detect_click(this)'>Water Conservation</a>
+<br>
+- <a href='https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/docs/2019jul/uw_supplier_data_definitions.pdf' onclick='detect_click(this)'>Metadata (Water Conservation)</a>
+<br>
+- <a href='http://atlas-dwr.opendata.arcgis.com/datasets/45d26a15b96346f1816d8fe187f8570d_0' onclick='detect_click(this)'>Water Districts (Spatial)</a>
+<br>
 <br>
 <b>
 References:</b><br>
-Gomberg, Max et al. 2019. Water Conservation and Production Reports. California State Water Resources Control Board. https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/conservation_reporting.html<br>
-Department of Water Resources Atlas. 2019. Water Districts. CA Department of Water Resources GIS Data. http://atlas-dwr.opendata.arcgis.com/datasets/45d26a15b96346f1816d8fe187f8570d_0")
+Gomberg, Max et al. 2019. Water Conservation and Production Reports. California State Water Resources Control Board. 
+<br>
+<a href='https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/conservation_reporting.html' onclick='detect_click(this)'>Website</a>
+<br>
+Department of Water Resources Atlas. 2019. Water Districts. CA Department of Water Resources GIS Data. 
+<br>
+<a href='http://atlas-dwr.opendata.arcgis.com/datasets/45d26a15b96346f1816d8fe187f8570d_0' onclick='detect_click(this)'>Website</a>")
     })
   }
   
