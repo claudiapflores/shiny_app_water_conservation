@@ -60,7 +60,7 @@ server <- function(input, output) {
   # reactive map dataframe
   water_reactive <- reactive({
     water_total %>% 
-      select(supplier_name) %>% 
+      select(supplier_name, total_population_served) %>% 
       filter(supplier_name == input$supplier_select)
   })
   
@@ -72,7 +72,8 @@ server <- function(input, output) {
     # tmap_mode("view")
     map <- tm_basemap("Hydda.Base") +
       tm_shape(water_reactive()) +
-      tm_fill("supplier_name")
+      tm_fill("total_population_served", palette = c("-Blues"), alpha = 0.7, legend.show = FALSE) +
+      tm_polygons("total_population_served", id = "total_population_served")
     
     tmap_leaflet(map)
     
