@@ -6,14 +6,13 @@ library(shinydashboard)
 library(devtools)
 library(shinyWidgets)
 library(shinythemes)
-# library(shiny)
 # library(shinydashboard)
 library(leaflet)
 library(tmap)
 library(tmaptools)
 library(mapview)
 library(sf)
-# library(kableExtra)
+library(kableExtra)
 
 
 ### User Interface
@@ -31,15 +30,16 @@ ui <- fluidPage(
                                     label = "Choose one or more:",
                                     choices = list("Reported" = 1, "Warning Issued" = 2, "Follow-Up" = 3),
                                     selected = 1),
-                 sliderInput("slider2", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2019-09-01")), timeFormat = "%b %Y"),
-                 textOutput("SliderText")
+                 sliderInput("date_select", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2019-09-01")), timeFormat = "%b %Y"),
+                 dateRangeInput("date_select_2", "Reporting Year-Month-Date", start = "2015-04-01", end = "2019-09-01", format = "yyyy-mm-dd", startview = "month", weekstart = 0, separator = "to")
     ),
   
     mainPanel( tabsetPanel(
       tabPanel("Water Supplier Results",
                p("Map of California Water Suppliers:"),
                leafletOutput(outputId = "water_map"),
-               p("Other Outputs")),
+               p("Other Outputs"),
+      tableOutput(outputId = "date_table")),
       tabPanel("User Information", htmlOutput("tab1")),
       tabPanel("Background", htmlOutput("tab2")),
       tabPanel("Data", htmlOutput("tab3"))
@@ -77,13 +77,14 @@ server <- function(input, output) {
     
   })
   
-  # reactive for date
-  date <- reactive({ water_merged %>% 
-      select(reporting_month) %>% 
-      filter(reporting_month == input$slider2)
-  })
+  # reactive for date widget
+  date_reactive <- reactive({
+    water_merged %>%
+      filter(yy_mm_dd == input$date_select_2) %>%
+      select(supplier_name, mandatory_restrictions, stage_invoked)
   
-  output$datetable <- renderTable({ input$date })
+  output$date_table <- renderTable({date_reactive()})
+  })
   
   # text for tabs
   {

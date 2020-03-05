@@ -19,6 +19,9 @@ library(dplyr)
 library(stringr)
 library(sf)
 library(here)
+library(lubridate)
+library(anytime)
+library(zoo)
 ```
 
 To do:
@@ -54,9 +57,13 @@ water_conservation <- water_conservation %>%
 # Merge datasets.
 water_merged <- merge(water_conservation,water_supplier_clean, by = "supplier_name")
 
+# Change reporting_month column to date format.
+water_merged <- water_merged %>% 
+   mutate(yy_mm_dd = lubridate::parse_date_time(reporting_month, "my"))
+         
 # Check number of unique observations in water_conservation dataframe supplier_name column.
 water_conservation_dup <- water_conservation %>% 
-  distinct(supplier_name)
+  distinct(supplier_name) 
 
 # See what observations cannot be matched in water_merged from water_conservation and water_supplier dataframes.
 missing_data <- anti_join(water_supplier_clean, water_conservation, by = "supplier_name")
