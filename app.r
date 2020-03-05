@@ -26,9 +26,9 @@ ui <- fluidPage(
                              label = "Choose a Supplier:",
                              choices = unique(water_total$supplier_name)
                  ),
-                 checkboxGroupInput(inputId = "reports_select",
-                                    label = "Choose one or more:",
-                                    choices = list("Reported" = 1, "Warning Issued" = 2, "Follow-Up" = 3),
+                 radioButtons(inputId = "hydrologic_region",
+                                    label = "Choose Hydrologic Region:",
+                                    choices = c(unique(water_merged$hydrologic_region)),
                                     selected = 1),
                  sliderInput("date_select", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2019-09-01")), timeFormat = "%b %Y"),
                  dateRangeInput("date_select_2", "Reporting Year-Month-Date", start = "2015-04-01", end = "2019-09-01", format = "yyyy-mm-dd", startview = "month", weekstart = 0, separator = "to")
@@ -38,7 +38,7 @@ ui <- fluidPage(
       tabPanel("Water Supplier Results",
                p("Map of California Water Suppliers:"),
                leafletOutput(outputId = "water_map"),
-               p("Other Outputs"),
+               p("Reporting Table"),
       tableOutput(outputId = "datetable")),
       tabPanel("User Information", htmlOutput("tab1")),
       tabPanel("Background", htmlOutput("tab2")),
@@ -80,8 +80,8 @@ server <- function(input, output) {
   # Reactive table
   datetable <- reactive({
     water_merged %>%
-      filter(yy_mm_dd == input$date_select_2, supplier_name == input$supplier_select) %>%
-      group_by(supplier_name) %>%
+      filter(yy_mm_dd == input$date_select, hydrologic_region == input$hydrologic_region) %>%
+      group_by(hydrologic_region) %>%
       summarize(
         tot_complaints = sum(complaints_received),
         follow_ups = sum(follow_up_actions),
