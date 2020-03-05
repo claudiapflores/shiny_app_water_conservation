@@ -38,6 +38,7 @@ ui <- fluidPage(
       tabPanel("Water Supplier Results",
                p("Map of California Water Suppliers:"),
                leafletOutput(outputId = "water_map"),
+               
                p("Reporting Table"),
       tableOutput(outputId = "datetable")),
       tabPanel("User Information", htmlOutput("tab1")),
