@@ -39,7 +39,7 @@ ui <- fluidPage(
                p("Map of California Water Suppliers:"),
                leafletOutput(outputId = "water_map"),
                p("Other Outputs"),
-      tableOutput(outputId = "date_table")),
+      tableOutput(outputId = "datetable")),
       tabPanel("User Information", htmlOutput("tab1")),
       tabPanel("Background", htmlOutput("tab2")),
       tabPanel("Data", htmlOutput("tab3"))
@@ -74,6 +74,25 @@ server <- function(input, output) {
       tm_fill("supplier_name")
     
     tmap_leaflet(map)
+    
+  })
+  
+  # Reactive table
+  datetable <- reactive({
+    water_merged %>%
+      filter(yy_mm_dd == input$date_select_2, supplier_name == input$supplier_select) %>%
+      group_by(supplier_name) %>%
+      summarize(
+        tot_complaints = sum(complaints_received),
+        follow_ups = sum(follow_up_actions),
+        tot_warnings = sum(warnings_issued)
+      )
+  })
+  
+  # Reactive outputtable
+  output$datetable <- renderTable({
+    
+    datetable()
     
   })
   
