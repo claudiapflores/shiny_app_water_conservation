@@ -92,7 +92,28 @@ server <- function(input, output) {
       "this is text1"
     })
     output$tab2 <- renderText({
-      "this is text2"
+      "From 2011 to 2017, California experienced an intense, historical drought, which eventually imposed an executive order of a 25 percent reduction in statewide water usage (Executive Order B-29-2015. In 2014, the California State Water Resources Control Board introduced regulation for drought emergency water conservation. Water suppliers with more than 3,000 connections were required to submit monthly reports to the State Water Board that included residential gallons-used-per-capita, number of water days allowed, and whether the supplier was under mandatory restrictions. After November 2017, reporting to the State Water Board became voluntary. However, shortly after in May 2018, Governor Jerry Brown signed Senate Bill 606 and Assembly Bill 1668, which reauthorized the mandatory reporting. 
+<br>
+Throughout the drought, many efforts were made to get residents to reduce their water usage. Since declaring the end of the drought in April 2017, residential water use per capita has on average become stagnant. To promote and encourage a more water saving conscious lifestyle, Governor Jerry Brown continued the monitoring of wasteful water use practice through Executive Order B-40-17. Monitoring was first introduced in the drought emergency water conservation regulation in July 2014. The follow activities are prohibited: 
+<br>
+- Using potable water to wash sidewalks and driveways<br>
+- Allowing more than incidental runoff when irrigating turf and other ornamental landscapes<br>
+- Using hoses without automatic shutoff nozzles to wash motor vehicles<br>
+- Using potable water in ornamental fountains or decorative water features that do not recirculate the water <br>
+- Irrigating turf and ornamental landscape during and within 48 hours following measurable rainfall <br>
+- Hotels and motels laundering towels and linens daily without providing guests the option of using them again <br>
+- During a drought emergency, the serving of drinking water in restaurants and bars without it being requested <br>
+- As of January 1, 2025, irrigating turf on public street medians and parkways unless the turf serves a community recreational or civic function, the turf is irrigated incidentally with trees, or the turf is watered with recycled water by an irrigation system installed prior to January 1, 2018.<br>
+<br>
+<b>References:</b>
+<br>
+“Regulation Rulemaking on Urban Water Supplier Monthly Water Conservation Report.” 2020. California Water Resources Control Board.
+<br>
+<a href='https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/water_conservation_reports/' onclick='detect_click(this)'>Website</a>
+<br>
+“Changes to the Proposed Regulation on Wasteful Water Use Practices.” 2018. California Water Resources Control Board. 
+<br>
+<a href='https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/regs/docs/factsheet_reg_013118.pdf' onclick='detect_click(this)'>Website</a>"
     })
     output$tab3 <- renderText({paste(
       "The water conservation data used for this project is from the California State Water Resources Control Board and the spatial data is from the California Department of Water Resources. The California State Water Resources Control Board collected data from June 2014 to November 2019 from 409 municipalities. All conversions for the conservation data were completed by the State Water Board and can be viewed
