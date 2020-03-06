@@ -30,8 +30,10 @@ ui <- fluidPage(
                                     label = "Choose Hydrologic Region:",
                                     choices = c(unique(water_merged$hydrologic_region)),
                                     selected = 1),
-                 sliderInput("date_select", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2019-09-01")), timeFormat = "%b %Y"),
-                 dateRangeInput("date_select_2", "Reporting Year-Month-Date", start = "2015-04-01", end = "2019-09-01", format = "yyyy-mm-dd", startview = "month", weekstart = 0, separator = "to")
+                 #sliderInput("date_select", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2015-09-01")), timeFormat = "%b %Y"),
+                 #dateRangeInput("date_select_2", "Reporting Year-Month-Date", start = "2015-04-01", end = "2019-09-01", format = "yyyy-mm", startview = "month", weekstart = 0, separator = "to")
+                 sliderInput(inputId = "date_select_year", label = "Select Year", min = 2015, max = 2019, value = c(2015, 2019), sep = ""), 
+                 sliderInput(inputId = "date_select_month", label = "Select Month", min = as.Date(1), max = as.Date(12), value = as.Date(c(1, 12)), sep = "")
     ),
   
     mainPanel( tabsetPanel(
@@ -60,7 +62,7 @@ server <- function(input, output) {
   # reactive map dataframe
   water_reactive <- reactive({
     water_total %>% 
-      select(supplier_name, total_population_served) %>% 
+      select(supplier_name, `Population Served`) %>% 
       filter(supplier_name == input$supplier_select)
   })
   
@@ -72,8 +74,8 @@ server <- function(input, output) {
     # tmap_mode("view")
     map <- tm_basemap("Hydda.Base") +
       tm_shape(water_reactive()) +
-      tm_fill("total_population_served", palette = c("-Blues"), alpha = 0.7, legend.show = FALSE) +
-      tm_polygons("total_population_served", id = "total_population_served") 
+      tm_fill("Population Served", palette = c("-Blues"), alpha = 0.7, legend.show = FALSE) +
+      tm_polygons("Population Served", id = "Population Served") 
       
     
     tmap_leaflet(map)
@@ -83,7 +85,7 @@ server <- function(input, output) {
   # Reactive table
   datetable <- reactive({
     water_merged %>%
-      filter(yy_mm_dd == input$date_select, hydrologic_region == input$hydrologic_region) %>%
+      filter(yy_mm_dd == input$date_select_2, hydrologic_region == input$hydrologic_region) %>%
       group_by(hydrologic_region) %>%
       summarize(
         tot_complaints = sum(complaints_received),
@@ -98,14 +100,6 @@ server <- function(input, output) {
     datetable()
     
   })
-  
-  # reactive for date widget
-  date_reactive <- reactive({
-    water_merged %>%
-      filter(yy_mm_dd == input$date_select_2) %>%
-      select(supplier_name, mandatory_restrictions, stage_invoked)})
-    
-    output$date_table <- renderTable({date_reactive()})
   
   
   # reactive plot for per capita usage
@@ -124,7 +118,7 @@ server <- function(input, output) {
       theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
       labs(title = "Per Capita Water Use (2015 - 2019)",
            x = "Month and Year",
-           y = "Per Capita Water Use in Gallons")
+           y = "Per Capita Water Use in Gallons") 
   })
 
   
