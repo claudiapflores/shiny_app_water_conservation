@@ -111,19 +111,20 @@ server <- function(input, output) {
   # reactive plot for per capita usage
   per_capita_use_reactive <- reactive({
     water_merged %>% 
-      select(supplier_name, reporting_month, reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014) %>% 
+      select(supplier_name, yy_mm_dd, reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014) %>% 
       filter(supplier_name == input$supplier_select)
   })
   
   
   output$per_capita_use <- renderPlot({
-    ggplot(data = per_capita_use_reactive(), aes(x = reporting_month, y = reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014)) +
-      geom_col(color = "firebrick", fill = "firebrick", alpha = 0.5) +
-      theme_minimal() +
+    ggplot(data = per_capita_use_reactive(), aes(x = yy_mm_dd, y = reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014)) +
+      geom_col(color = "white", fill = "grey10", alpha = 0.5) +
+      # geom_line(color = "firebrick") +
+      theme_bw() +
       theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-      labs(title = "Per Capita Water Use",
+      labs(title = "Per Capita Water Use (2015 - 2019)",
            x = "Month and Year",
-           y = "Per Capita Water Use")
+           y = "Per Capita Water Use in Gallons")
   })
 
   
