@@ -57,6 +57,7 @@ water_conservation <- water_conservation %>%
 # Merge datasets.
 water_merged <- merge(water_conservation,water_supplier_clean, by = "supplier_name")
 
+
 # Change reporting_month column to date format.
 water_merged <- water_merged %>% 
    mutate(yy_mm_dd = lubridate::parse_date_time(reporting_month, "my"))
@@ -78,7 +79,8 @@ water_supplier_spatial <- read_sf(dsn = here::here("spatial_data"), layer = "Wat
 
 # Water supplier spatial data with water conservation
 water_total <-  merge(water_conservation,water_supplier_spatial, by = "supplier_name") %>% 
-  st_as_sf() 
+  st_as_sf() %>% 
+    dplyr::rename("Total Population Served" = total_population_served)
 
 # Read in ca_counties spatial data
 

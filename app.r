@@ -99,12 +99,20 @@ server <- function(input, output) {
   })
   
   # reactive for date widget
+ # date_reactive <- reactive({
+  #  water_merged %>%
+   #   filter(yy_mm_dd == input$date_select_2) %>%
+    #  select(supplier_name, mandatory_restrictions, stage_invoked)
+  
+#  output$date_table <- renderTable({date_reactive()})
+#  })
+  
   date_reactive <- reactive({
     water_merged %>%
-      filter(yy_mm_dd == input$date_select_2) %>%
+      filter(yy_mm_dd == input$date_select) %>%
       select(supplier_name, mandatory_restrictions, stage_invoked)
-  
-  output$date_table <- renderTable({date_reactive()})
+    
+    output$date_table <- renderTable({date_reactive()})
   })
   
   # text for tabs
