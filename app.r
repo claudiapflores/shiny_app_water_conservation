@@ -46,7 +46,7 @@ ui <- fluidPage(
       tabPanel("Data", htmlOutput("tab3"))
     ),
               #p(""),
-              #plotOutput(outputId = "water_map"),
+              plotOutput(outputId = "per_capita_use"),
               #p(""),
               #plotOutput(outputId = "water_map"),
     )
@@ -73,7 +73,8 @@ server <- function(input, output) {
     map <- tm_basemap("Hydda.Base") +
       tm_shape(water_reactive()) +
       tm_fill("total_population_served", palette = c("-Blues"), alpha = 0.7, legend.show = FALSE) +
-      tm_polygons("total_population_served", id = "total_population_served")
+      tm_polygons("total_population_served", id = "total_population_served") 
+      
     
     tmap_leaflet(map)
     
@@ -99,21 +100,32 @@ server <- function(input, output) {
   })
   
   # reactive for date widget
- # date_reactive <- reactive({
-  #  water_merged %>%
-   #   filter(yy_mm_dd == input$date_select_2) %>%
-    #  select(supplier_name, mandatory_restrictions, stage_invoked)
-  
-#  output$date_table <- renderTable({date_reactive()})
-#  })
-  
   date_reactive <- reactive({
     water_merged %>%
-      filter(yy_mm_dd == input$date_select) %>%
-      select(supplier_name, mandatory_restrictions, stage_invoked)
+      filter(yy_mm_dd == input$date_select_2) %>%
+      select(supplier_name, mandatory_restrictions, stage_invoked)})
     
     output$date_table <- renderTable({date_reactive()})
+  
+  
+  # reactive plot for per capita usage
+  per_capita_use_reactive <- reactive({
+    water_merged %>% 
+      select(supplier_name, reporting_month, reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014) %>% 
+      filter(supplier_name == input$supplier_select)
   })
+  
+  
+  output$per_capita_use <- renderPlot({
+    ggplot(data = per_capita_use_reactive(), aes(x = reporting_month, y = reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014)) +
+      geom_col(color = "firebrick", fill = "firebrick", alpha = 0.5) +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+      labs(title = "Per Capita Water Use",
+           x = "Month and Year",
+           y = "Per Capita Water Use")
+  })
+
   
   # text for tabs
   {

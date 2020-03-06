@@ -89,6 +89,10 @@ ca_counties <- read_sf(dsn = here::here("CA_Counties"), layer = "CA_Counties_TIG
   select(NAME)
 
 
+
+
+
+
 ```
 
 
