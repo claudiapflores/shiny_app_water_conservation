@@ -22,6 +22,10 @@ library(here)
 library(lubridate)
 library(anytime)
 library(zoo)
+library(praise)
+library(beepr)
+
+beep(2)
 ```
 
 To do:
@@ -41,9 +45,14 @@ water_supplier <- read_csv("Water_Districts.csv") %>%
 water_supplier_clean <- water_supplier %>% 
   select(agencyname,global_id)
 
+ 
+beep(4)
+
 # Rename agencyname column in water_supplier dataframe to supplier_name.
 water_supplier_clean <- water_supplier_clean %>%
   dplyr::rename(supplier_name = agencyname)
+
+beep(12)
 
 # Remove white spaces in and from both sides of text for supplier_name column in both datafames.
 water_supplier_clean <- water_supplier_clean %>% 
@@ -57,6 +66,8 @@ water_conservation <- water_conservation %>%
 # Merge datasets.
 water_merged <- merge(water_conservation,water_supplier_clean, by = "supplier_name")
 
+praise()
+beep(5)
 
 # Change reporting_month column to date format.
 water_merged <- water_merged %>% 
@@ -93,8 +104,8 @@ ca_counties <- read_sf(dsn = here::here("CA_Counties"), layer = "CA_Counties_TIG
 
 
 
-
-
+praise()
+beep(9)
 
 ```
 

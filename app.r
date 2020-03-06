@@ -113,7 +113,7 @@ server <- function(input, output) {
     # tmap_mode("view")
     map <- tm_basemap("CartoDB.Positron") +
       tm_shape(water_reactive()) +
-      # tm_fill("Population Served", alpha = 0.5, legend.show = FALSE) +
+      tm_fill("Population Served", alpha = 0.5, legend.show = FALSE) +
       tm_polygons("Population Served", id = "Population Served", alpha = 0.1) 
       
     
