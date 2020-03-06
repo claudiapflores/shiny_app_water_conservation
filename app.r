@@ -45,7 +45,7 @@ ui <- fluidPage(
       tabPanel("Background", htmlOutput("tab2")),
       tabPanel("Data", htmlOutput("tab3"))
     ),
-              #p(""),
+              p("Water use per capita by watter supplier"),
               plotOutput(outputId = "per_capita_use"),
               #p(""),
               #plotOutput(outputId = "water_map"),
