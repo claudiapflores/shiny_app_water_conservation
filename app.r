@@ -33,7 +33,7 @@ ui <- fluidPage(
                  #sliderInput("date_select", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2015-09-01")), timeFormat = "%b %Y"),
                  #dateRangeInput("date_select_2", "Reporting Year-Month-Date", start = "2015-04-01", end = "2019-09-01", format = "yyyy-mm", startview = "month", weekstart = 0, separator = "to")
                  sliderInput(inputId = "date_select_year", label = "Select Year", min = 2015, max = 2019, value = c(2015, 2019), sep = ""), 
-                 sliderInput(inputId = "date_select_month", label = "Select Month", min = as.Date(1), max = as.Date(12), value = as.Date(c(1, 12)), sep = "")
+                 #sliderInput(inputId = "date_select_month", label = "Select Month", min = as.Date("1"), max = as.Date("12"), value = as.Date(c("1", "12")), timeFormat = "%b", sep = "")
     ),
   
     mainPanel( tabsetPanel(
@@ -85,7 +85,7 @@ server <- function(input, output) {
   # Reactive table
   datetable <- reactive({
     water_merged %>%
-      filter(yy_mm_dd == input$date_select_2, hydrologic_region == input$hydrologic_region) %>%
+      filter(year == input$date_select_year, hydrologic_region == input$hydrologic_region) %>%
       group_by(hydrologic_region) %>%
       summarize(
         tot_complaints = sum(complaints_received),
