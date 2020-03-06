@@ -111,10 +111,10 @@ server <- function(input, output) {
   output$water_map <- renderLeaflet({
     
     # tmap_mode("view")
-    map <- tm_basemap("Hydda.Base") +
+    map <- tm_basemap("CartoDB.Positron") +
       tm_shape(water_reactive()) +
-      tm_fill("Population Served", palette = c("-Blues"), alpha = 0.7, legend.show = FALSE) +
-      tm_polygons("Population Served", id = "Population Served") 
+      # tm_fill("Population Served", alpha = 0.5, legend.show = FALSE) +
+      tm_polygons("Population Served", id = "Population Served", alpha = 0.1) 
       
     
     tmap_leaflet(map)
