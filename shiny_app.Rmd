@@ -63,7 +63,7 @@ water_merged <- water_merged %>%
    mutate(yy_mm_dd = lubridate::parse_date_time(reporting_month, "my")) %>% 
   mutate(month = month(yy_mm_dd, label = TRUE)) %>% 
   mutate(year = year(yy_mm_dd)) %>% 
-  
+  factor(water_merged$month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
          
 # Check number of unique observations in water_conservation dataframe supplier_name column.
 water_conservation_dup <- water_conservation %>% 

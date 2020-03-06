@@ -17,43 +17,83 @@ library(kableExtra)
 
 ### User Interface
 
-ui <- fluidPage(
+ui <- navbarPage("Understanding California Municipal Water Supply and Use",
   theme = shinytheme("superhero"),
-  titlePanel("Understanding California Municipal Water Supply and Use"),
-  sidebarLayout(
-    sidebarPanel("",
+  #titlePanel("Understanding California Municipal Water Supply and Use"),
+  tabPanel("Water Supplier Results",
+    sidebarPanel(
                  selectInput(inputId = "supplier_select",
                              label = "Choose a Supplier:",
                              choices = unique(water_total$supplier_name)
-                 ),
-                 radioButtons(inputId = "hydrologic_region",
-                                    label = "Choose Hydrologic Region:",
-                                    choices = c(unique(water_merged$hydrologic_region)),
-                                    selected = 1),
-                 #sliderInput("date_select", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2015-09-01")), timeFormat = "%b %Y"),
-                 #dateRangeInput("date_select_2", "Reporting Year-Month-Date", start = "2015-04-01", end = "2019-09-01", format = "yyyy-mm", startview = "month", weekstart = 0, separator = "to")
-                 sliderInput(inputId = "date_select_year", label = "Select Year", min = 2015, max = 2019, value = c(2015, 2019), sep = ""), 
-                 #sliderInput(inputId = "date_select_month", label = "Select Month", min = as.Date("1"), max = as.Date("12"), value = as.Date(c("1", "12")), timeFormat = "%b", sep = "")
-    ),
-  
-    mainPanel( tabsetPanel(
-      tabPanel("Water Supplier Results",
-               p("Map of California Water Suppliers:"),
+                 )),
+    mainPanel(
                leafletOutput(outputId = "water_map"),
                
-               p("Reporting Table"),
-      tableOutput(outputId = "datetable")),
-      tabPanel("User Information", htmlOutput("tab1")),
-      tabPanel("Background", htmlOutput("tab2")),
-      tabPanel("Data", htmlOutput("tab3"))
-    ),
-              p("Water use per capita by watter supplier"),
-              plotOutput(outputId = "per_capita_use"),
+               plotOutput(outputId = "per_capita_use")
+      )),
+  tabPanel("Hydrological Region Results",
+           sidebarPanel(
+             radioButtons(inputId = "hydrologic_region",
+                          label = "Choose Hydrologic Region:",
+                          choices = c(unique(water_merged$hydrologic_region)),
+                          selected = NULL),
+             sliderInput(inputId = "date_select_year",
+                         label = "Select Year", 
+                         min = 2015, 
+                         max = 2019, 
+                         value = c(2015, 2019), 
+                         sep = "")
+           ),
+           mainPanel(
+             tableOutput(outputId = "datetable")
+           )),
+  tabPanel("User Information",
+           mainPanel(
+             htmlOutput("tab1")
+           )),
+  tabPanel("Background Information",
+           mainPanel(
+             htmlOutput("tab2")
+           )),
+  tabPanel("Data",
+           mainPanel(
+             htmlOutput("tab3")
+           )))
+  
+  
+                 
+                 #radioButtons(inputId = "hydrologic_region",
+                                    #label = "Choose Hydrologic Region:",
+                                    #choices = c(unique(water_merged$hydrologic_region)),
+                                    #selected = 1),
+                 #sliderInput("date_select", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2015-09-01")), timeFormat = "%b %Y"),
+                 #dateRangeInput("date_select_2", "Reporting Year-Month-Date", start = "2015-04-01", end = "2019-09-01", format = "yyyy-mm", startview = "month", weekstart = 0, separator = "to")
+                 #sliderInput(inputId = "date_select_year", label = "Select Year", min = 2015, max = 2019, value = c(2015, 2019), sep = ""), 
+                 
+                 #sliderInput(inputId = "date_select_month", label = "Select Month", min = as.Date("1"), max = as.Date("12"), value = as.Date(c("1", "12")), timeFormat = "%b", sep = "")
+   # ),
+  
+    #mainPanel( tabsetPanel(
+      #tabPanel("Water Supplier Results",
+               #p("Map of California Water Suppliers:"),
+               #leafletOutput(outputId = "water_map"),
+               
+               #p("Reporting Table"),
+      #tableOutput(outputId = "datetable"),
+      #p("Water use per capita by watter supplier"),
+      #plotOutput(outputId = "per_capita_use"),
+      #),
+      
+      #tabPanel("User Information", htmlOutput("tab1")),
+      #tabPanel("Background", htmlOutput("tab2")),
+      #tabPanel("Data", htmlOutput("tab3"))
+    #),
+             
               #p(""),
               #plotOutput(outputId = "water_map"),
-    )
-  )
-)
+    #)
+  #)
+#)
   
   
   
