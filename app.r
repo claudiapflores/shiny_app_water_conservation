@@ -19,7 +19,10 @@ library(kableExtra)
 
 ui <- navbarPage("Understanding California Municipal Water Supply and Use",
   theme = shinytheme("superhero"),
-  #titlePanel("Understanding California Municipal Water Supply and Use"),
+  tabPanel("User Information",
+           mainPanel(
+             htmlOutput("tab1")
+           )),
   tabPanel("Water Supplier Results",
     sidebarPanel(
                  selectInput(inputId = "supplier_select",
@@ -33,7 +36,7 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
       )),
   tabPanel("Hydrological Region Results",
            sidebarPanel(
-             radioButtons(inputId = "hydrologic_region",
+             checkboxGroupInput(inputId = "hydrologic_region",
                           label = "Choose Hydrologic Region:",
                           choices = c(unique(water_merged$hydrologic_region)),
                           selected = NULL),
@@ -46,10 +49,6 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
            ),
            mainPanel(
              tableOutput(outputId = "datetable")
-           )),
-  tabPanel("User Information",
-           mainPanel(
-             htmlOutput("tab1")
            )),
   tabPanel("Background Information",
            mainPanel(
