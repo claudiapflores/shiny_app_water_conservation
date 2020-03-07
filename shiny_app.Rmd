@@ -73,8 +73,7 @@ beep(5)
 water_merged <- water_merged %>% 
    mutate(yy_mm_dd = lubridate::parse_date_time(reporting_month, "my")) %>% 
   mutate(month = month(yy_mm_dd, label = TRUE)) %>% 
-  mutate(year = year(yy_mm_dd)) %>% 
-  factor(water_merged$month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+  mutate(year = year(yy_mm_dd))
          
 # Check number of unique observations in water_conservation dataframe supplier_name column.
 water_conservation_dup <- water_conservation %>% 
@@ -102,10 +101,6 @@ ca_counties <- read_sf(dsn = here::here("CA_Counties"), layer = "CA_Counties_TIG
   st_transform(crs = 4326) %>% 
   select(NAME)
 
-
-
-praise()
-beep(9)
 
 ```
 
