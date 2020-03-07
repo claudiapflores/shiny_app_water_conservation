@@ -247,8 +247,8 @@ Department of Water Resources Atlas. 2019. Water Districts. CA Department of Wat
 <br>"
     })
     output$tab4 <- renderText({"
-    <h1>App Developers</h1>
-      <br>
+    <h1>App Developers  <img src='206.png', height='55px', style=''/><img src='244.png', height='60px', style=''/></h1>
+    <br>
     <b>Claudia Flores</b> <br> <img src='claudia.jpg', height='300px', style='float:right'/> 
     <p>Claudia graduated from the University of California, Los Angeles (UCLA) with a Bachelor of Science in Environmental Science and a concentration in Systems and Societies in 2017. As an undergraduate, Claudia interned with GlobeMed and Mpoma Community HIV/AIDS Initiative in Uganda to work on water access, sanitation, and hygiene projects. Claudia’s work in Uganda allowed her to develop an interest in policy and water resources. To continue to pursue her interests, Claudia worked with other organizations such as Los Angeles Waterkeeper, Heal the Bay’s Santa Monica Pier Aquarium, and the Southern California Wetlands Recovery Project. Upon graduating, she was a researcher for the Water Program at the UCLA Luskin Center for Innovation. Claudia worked on developing scenarios for a statewide drinking water assistance program for low-income households. After the Luskin Center, she worked at the Environmental Finance Center at the University of North Carolina, Chapel Hill, where she evaluated criteria required to receive principal forgiveness for the Georgia State Revolving Fund programs. At the Bren School, Claudia plans to find innovative and economically feasible solutions for water infrastructure maintenance and sustainable practices in water resource management.</p>
     <br>
