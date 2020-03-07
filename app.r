@@ -39,15 +39,21 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
   tabPanel("Hydrological Region Results",
            sidebarPanel(
              checkboxGroupInput(inputId = "hydrologic_region",
-                          label = "Choose Hydrologic Region:",
+                          label = "Choose One or More Hydrologic Region:",
                           choices = c(unique(water_merged$hydrologic_region)),
-                          selected = NULL),
-             sliderInput(inputId = "date_select_year",
-                         label = "Select Year", 
-                         min = 2015, 
-                         max = 2019, 
-                         value = c(2015, 2019), 
-                         sep = "")
+                          selected = "South Lahontan"),
+             #sliderInput(inputId = "date_select_year",
+                         #label = "Select Year", 
+                         #min = 2015, 
+                         #max = 2019, 
+                         #value = c(2015, 2019), 
+                         #sep = ""),
+             sliderInput("date_select", 
+                         "Reporting Month and Year:", 
+                         min = as.Date("2015-04-01"), 
+                         max = as.Date("2019-09-01"), 
+                         value = as.Date(c("2015-04-01","2019-09-01")), 
+                         timeFormat = "%b %Y"),
            ),
            mainPanel(
              tableOutput(outputId = "datetable")
@@ -134,7 +140,7 @@ server <- function(input, output) {
   # Reactive table
   datetable <- reactive({
     water_merged %>%
-      filter(year == input$date_select_year, hydrologic_region == input$hydrologic_region) %>%
+      filter(yy_mm_dd == input$date_select, hydrologic_region == input$hydrologic_region) %>%
       group_by(hydrologic_region) %>%
       summarize(
         tot_complaints = sum(complaints_received),
