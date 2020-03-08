@@ -165,15 +165,34 @@ server <- function(input, output) {
         footnote = "By Hydrologic Region from 2015 - 2019",
         location = cells_title()
       ) %>%
+      tab_style(
+        cell_borders(
+          sides = "all",
+          color = "black",
+          style = "solid",
+          weight = px(2)
+        ),
+        locations = list(
+          cells_body(
+          columns = everything(),
+          row = everything()
+        )
+      )) %>% 
       cols_label(
-        hydrologic_region = "Hydrologic Region",
-        tot_complaints = "Total Complaints",
-        follow_ups = "Follow Ups",
-        tot_warnings = "Total Warnings"
+        hydrologic_region = md("**Hydrologic Region**"),
+        tot_complaints = md("**Total Complaints**"),
+        follow_ups = md("**Follow Ups**"),
+        tot_warnings = md("**Total Warnings**")
       ) %>% 
       cols_align(
         align = c("center"), columns = TRUE
-        ) 
+        )
+      # cell_borders(
+      #   sides = "all",
+      #   color = "#0000FF",
+      #   weight = px(1.5),
+      #   style = "solid"
+      #)
     
   })
   
