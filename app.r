@@ -13,6 +13,7 @@ library(tmaptools)
 library(mapview)
 library(sf)
 library(kableExtra)
+library(gt)
 
 
 ### User Interface
@@ -56,7 +57,7 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
                          timeFormat = "%b %Y"),
            ),
            mainPanel(
-             tableOutput(outputId = "datetable")
+             gt_output(outputId = "datetable")
            )),
   tabPanel("Background Information",
            mainPanel(
@@ -150,9 +151,29 @@ server <- function(input, output) {
   })
   
   # Reactive outputtable
-  output$datetable <- renderTable({
+  output$datetable <- render_gt({
     
-    datetable()
+     datetable() %>%
+      gt() %>%
+      tab_header(
+        title = "Total Reports, Follow Ups, Warnings Issued"
+      ) %>%
+      tab_options(
+        table.width = pct(100)
+      ) %>%
+      tab_footnote(
+        footnote = "By Hydrologic Region from 2015 - 2019",
+        location = cells_title()
+      ) %>%
+      cols_label(
+        hydrologic_region = "Hydrologic Region",
+        tot_complaints = "Total Complaints",
+        follow_ups = "Follow Ups",
+        tot_warnings = "Total Warnings"
+      ) %>% 
+      cols_align(
+        align = c("center"), columns = TRUE
+        ) 
     
   })
   
