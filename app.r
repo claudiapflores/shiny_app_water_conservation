@@ -187,13 +187,6 @@ server <- function(input, output) {
       cols_align(
         align = c("center"), columns = TRUE
         )
-      # cell_borders(
-      #   sides = "all",
-      #   color = "#0000FF",
-      #   weight = px(1.5),
-      #   style = "solid"
-      #)
-    
   })
   
   
