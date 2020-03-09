@@ -63,6 +63,9 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
            mainPanel(
              gt_output(outputId = "datetable"),
              leafletOutput(outputId = "water_map_2")
+             
+             #static map output (uncheck to see)
+             # plotOutput(outputId = "water_map_static")
            )),
   tabPanel("Background",
            mainPanel(width = 20,
@@ -96,8 +99,8 @@ server <- function(input, output) {
     # tmap_mode("view")
     map <- tm_basemap("CartoDB.Positron") +
       tm_shape(water_reactive()) +
-      tm_fill("Population Served", alpha = 0.5, legend.show = FALSE) +
-      tm_polygons("Population Served", id = "Population Served", alpha = 0.1) 
+      tm_fill("Population Served", alpha = 0.8, colour = "blue", legend.show = FALSE) +
+      tm_polygons("supplier_name", id = "Population Served") 
       
     tmap_leaflet(map)
     
@@ -197,9 +200,9 @@ server <- function(input, output) {
   
   # reactive map for hydrologic region
   
-  output$water_map_2 <- renderLeaflet({
+   output$water_map_2 <- renderLeaflet({
     
-    # tmap_mode("view")
+     tmap_mode("view")
     map <- tm_basemap("CartoDB.Positron") +
       tm_shape(hydro_reactive()) +
       tm_fill("hr_name", alpha = 0.5, legend.show = FALSE) +
@@ -209,6 +212,19 @@ server <- function(input, output) {
     tmap_leaflet(map)
     
   })
+  # static map for hydrologic region
+  
+  # output$water_map_static <- renderPlot({
+    
+    #ggplot(hydro_reactive()) +
+     # geom_sf(data = ca_counties,
+      #        size = 0.1,
+       #       color = "black") +
+      #geom_sf(aes(fill = hr_name),
+       #       alpha = 0.4) +
+      #theme_bw()
+    
+  #})
 
   
   # text for tabs
