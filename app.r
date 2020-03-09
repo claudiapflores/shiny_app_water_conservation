@@ -216,7 +216,7 @@ server <- function(input, output) {
   
   output$water_map_static <- renderPlot({
     
-    ggplot(hydro_spatial()) +
+    ggplot(hydrologic_spatial()) +
       geom_sf(data = ca_counties,
               size = 0.1,
               color = "black") +
@@ -333,15 +333,29 @@ Allison Horst. UCSB Bren School.
     output$tab4 <- renderText({"
     <h1>App Developers  <img src='206.png', height='55px', style=''/><img src='244.png', height='60px', style=''/></h1>
     <br>
-    <b>Claudia Flores</b> <br> <img src='claudia.jpg', height='300px', style='float:right'/> 
+    <b>Claudia Flores</b>
+    <a href='https://www.linkedin.com/in/claudiapflores/'>
+         <img alt='LinkedIn'src='linkedin.png'
+         width='25' height='25'></a>
+         <br> 
+    <img src='claudia.jpg', height='300px', style='float:right'/> 
     <p>Claudia graduated from the University of California, Los Angeles (UCLA) with a Bachelor of Science in Environmental Science and a concentration in Systems and Societies in 2017. As an undergraduate, Claudia interned with GlobeMed and Mpoma Community HIV/AIDS Initiative in Uganda to work on water access, sanitation, and hygiene projects. Claudia’s work in Uganda allowed her to develop an interest in policy and water resources. To continue to pursue her interests, Claudia worked with other organizations such as Los Angeles Waterkeeper, Heal the Bay’s Santa Monica Pier Aquarium, and the Southern California Wetlands Recovery Project. Upon graduating, she was a researcher for the Water Program at the UCLA Luskin Center for Innovation. Claudia worked on developing scenarios for a statewide drinking water assistance program for low-income households. After the Luskin Center, she worked at the Environmental Finance Center at the University of North Carolina, Chapel Hill, where she evaluated criteria required to receive principal forgiveness for the Georgia State Revolving Fund programs. At the Bren School, Claudia plans to find innovative and economically feasible solutions for water infrastructure maintenance and sustainable practices in water resource management.</p>
     <br>
     <br>
-<b>Alex Milward</b> <br> <img src='alex.jpg', height='300px', style='float:right'/>
+<b>Alex Milward</b>
+<a href='https://www.linkedin.com/in/alexander-milward-264831199/'>
+         <img alt='LinkedIn'src='linkedin.png'
+         width='25' height='25'></a>
+         <br> 
+<img src='alex.jpg', height='300px', style='float:right'/>
       <p>Alex Milward grew up in a small, rural town on the west side of California’s Sierra Nevada Mountains.  Here he enjoyed an immersion in nature and developed a passion for the natural world.  However, he was also witness to the environmental degradation that often accompanies an area rich in natural resources such as timber and water.  This led to a desire to pursue a career in environmental science and sustainability. Alex carried this passion to his undergraduate studies at the University of California, Santa Barbara, where he received a Bachelor of Science in Environmental Studies and Physical Geography in 2018. At UCSB, Alex conducted research alongside Dr. Jennifer King on wetland habitat restoration and its capacity to sequester atmospheric gases.  With this research came a curiosity of the influence that water was has on wetland habitats and the environment at large.  At Bren, Alex is specializing in water resources management, with a focus in environmental data science.  His goal is to analyze watersheds in the American west and develop new sustainability methods in regards to water appropriation, storage, and distribution to ensure the conservation of such a critical resource.</p>
       <br>
       <br>
-<b>Derek Nguyen</b> <br> <img src='derek.jpg', height='300px', style='float:right'/>
+<b>Derek Nguyen</b>
+<a href='https://www.linkedin.com/in/derek-nguyen-7483b010b/'>
+         <img alt='LinkedIn'src='linkedin.png'
+         width='25' height='25'></a>
+           <br> <img src='derek.jpg', height='300px', style='float:right'/>
       <p>Derek Nguyen graduated from the University of California, Santa Barbara in 2019 with a Bachelor of Arts in Environmental Studies. During his undergraduate career, Derek conducted research on dry groundwater wells in the Western 17 states. His research helped to measure other locations potentially experiencing impacts from groundwater depletion. Derek also served as the Food Recovery Project Coordinator of UCSB’s Sustainability Program where he developed and implemented food recovery programs on-campus to reduce food waste and food insecurity within the student body. Derek is currently an intern at the Goleta Water District where he assists the Engineering Department in collecting and analyzing water quality samples from various water zones within the district. Derek wants to specialize in Water Resources Management with afocus in Environmental Data Science to learn more about water use efficiency and demand management. He aspires to promote equity and resiliency of water systems especially in underserved communities.</p>
       <br>
       <br>
