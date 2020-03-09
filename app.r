@@ -222,7 +222,8 @@ server <- function(input, output) {
               color = "black") +
       geom_sf(aes(fill = hr_name),
               alpha = 0.4) +
-      theme_void() 
+      theme_void() +
+      labs(fill = "Hydrologic Region")
       
     
   })
