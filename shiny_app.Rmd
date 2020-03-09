@@ -1,6 +1,6 @@
 ---
 `title: "Water Conservation Shiny App"
-author: "Claudia Flores"
+author: "Claudia Flores, Alex Milward, Derek Nguyen"
 date: "2/18/2020"
 output: html_document
 ---
@@ -102,7 +102,7 @@ ca_counties <- read_sf(dsn = here::here("CA_Counties"), layer = "CA_Counties_TIG
 
 # Hydrologic regions data with proper shapefiles
 hydrologic_spatial <- read_sf(dsn = here::here("spatial_data_hydrologic"), layer = "Hydrologic_Regions") %>%
-  clean_names() 
+  clean_names()  
 
 ```
 
