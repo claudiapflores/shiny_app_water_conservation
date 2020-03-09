@@ -6,7 +6,6 @@ library(shinydashboard)
 library(devtools)
 library(shinyWidgets)
 library(shinythemes)
-# library(shinydashboard)
 library(leaflet)
 library(tmap)
 library(tmaptools)
@@ -14,6 +13,7 @@ library(mapview)
 library(sf)
 library(kableExtra)
 library(gt)
+library(ggthemes)
 
 
 ### User Interface
@@ -22,9 +22,9 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
   theme = shinytheme("superhero"),
   tabPanel("User Information",
            mainPanel(
+             HTML('<center><img src="pic3.jpg", height="350px"/></center>'),
              htmlOutput("tab1"),
-             HTML('<img src="bren.png", height="100px"    
-          style="float:left"/>')
+             HTML('<img src="bren.png", height="150px"/>'),
            )),
   tabPanel("Water Supplier Results",
     sidebarPanel(
@@ -34,7 +34,8 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
                  )),
     mainPanel(
                leafletOutput(outputId = "water_map"),
-               
+               HTML('<br>'),
+               HTML('<b>Residential Gallons Per Capita Day Water Use From April 2015 to September 2019</b>'),
                plotOutput(outputId = "per_capita_use")
       )),
   tabPanel("Hydrological Region Results",
@@ -57,7 +58,8 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
                          timeFormat = "%b %Y"),
            ),
            mainPanel(
-             gt_output(outputId = "datetable")
+             gt_output(outputId = "datetable"),
+             leafletOutput(outputId = "water_map_2")
            )),
   tabPanel("Background Information",
            mainPanel(
@@ -75,46 +77,9 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
   )
 
 
-  
-  
-                 
-                 #radioButtons(inputId = "hydrologic_region",
-                                    #label = "Choose Hydrologic Region:",
-                                    #choices = c(unique(water_merged$hydrologic_region)),
-                                    #selected = 1),
-                 #sliderInput("date_select", "Reporting Month and Year", min = as.Date("2015-04-01"), max = as.Date("2019-09-01"), value = c(as.Date("2015-04-01","2015-09-01")), timeFormat = "%b %Y"),
-                 #dateRangeInput("date_select_2", "Reporting Year-Month-Date", start = "2015-04-01", end = "2019-09-01", format = "yyyy-mm", startview = "month", weekstart = 0, separator = "to")
-                 #sliderInput(inputId = "date_select_year", label = "Select Year", min = 2015, max = 2019, value = c(2015, 2019), sep = ""), 
-                 
-                 #sliderInput(inputId = "date_select_month", label = "Select Month", min = as.Date("1"), max = as.Date("12"), value = as.Date(c("1", "12")), timeFormat = "%b", sep = "")
-   # ),
-  
-    #mainPanel( tabsetPanel(
-      #tabPanel("Water Supplier Results",
-               #p("Map of California Water Suppliers:"),
-               #leafletOutput(outputId = "water_map"),
-               
-               #p("Reporting Table"),
-      #tableOutput(outputId = "datetable"),
-      #p("Water use per capita by watter supplier"),
-      #plotOutput(outputId = "per_capita_use"),
-      #),
-      
-      #tabPanel("User Information", htmlOutput("tab1")),
-      #tabPanel("Background", htmlOutput("tab2")),
-      #tabPanel("Data", htmlOutput("tab3"))
-    #),
-             
-              #p(""),
-              #plotOutput(outputId = "water_map"),
-    #)
-  #)
-#)
-  
-  
-  
-  
+### Server Interface
 server <- function(input, output) {
+  # reactive map code below 
   # reactive map dataframe
   water_reactive <- reactive({
     water_total %>% 
@@ -123,8 +88,6 @@ server <- function(input, output) {
   })
   
   # reactive map
-
-  
   output$water_map <- renderLeaflet({
     
     # tmap_mode("view")
@@ -133,12 +96,12 @@ server <- function(input, output) {
       tm_fill("Population Served", alpha = 0.5, legend.show = FALSE) +
       tm_polygons("Population Served", id = "Population Served", alpha = 0.1) 
       
-    
     tmap_leaflet(map)
     
   })
   
-  # Reactive table
+  # reactive table code below
+  # reactive table dataframe
   datetable <- reactive({
     water_merged %>%
       filter(yy_mm_dd == input$date_select, hydrologic_region == input$hydrologic_region) %>%
@@ -150,7 +113,7 @@ server <- function(input, output) {
       )
   })
   
-  # Reactive outputtable
+  # reactive table
   output$datetable <- render_gt({
     
      datetable() %>%
@@ -190,23 +153,58 @@ server <- function(input, output) {
   })
   
   
-  # reactive plot for per capita usage
+  # reactive plot for per capita usage code below
+  # reactive plot for per capita usage dataframe
   per_capita_use_reactive <- reactive({
     water_merged %>% 
-      select(supplier_name, yy_mm_dd, reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014) %>% 
+      select(supplier_name, 
+             yy_mm_dd, 
+             reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014) %>% 
       filter(supplier_name == input$supplier_select)
   })
   
-  
+  # reactive plot reactive plot for per capita usage
+
   output$per_capita_use <- renderPlot({
-    ggplot(data = per_capita_use_reactive(), aes(x = yy_mm_dd, y = reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014)) +
-      geom_col(color = "white", fill = "grey10", alpha = 0.5) +
+    ggplot(data = per_capita_use_reactive(), 
+           aes(x = yy_mm_dd, 
+               y = reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014)) +
+      geom_col(color = "blue", 
+               fill = "blue", 
+               alpha = 0.5) +
       # geom_line(color = "firebrick") +
-      theme_bw() +
-      theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-      labs(title = "Per Capita Water Use (2015 - 2019)",
+      #theme(axis.text.x = element_text(angle = 90, 
+                                      # hjust = 1, 
+                                      # vjust = 0.5)) +
+      theme_classic() +
+      theme(axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 15))) +
+      theme(axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 15, l = 0))) +
+      labs(title = "",
            x = "Month and Year",
-           y = "Per Capita Water Use in Gallons") 
+           y = "Gallons Per Capita Day Water Use") 
+  })
+  
+  # hydrologic region map code below
+  # dataframe for hydrologic region
+  hydro_reactive <- reactive({
+    hydrologic_spatial %>% 
+      select(hr_name) %>% 
+      filter(hr_name == input$hydrologic_region)
+    })
+  
+  # reactive map for hydrologic region
+  
+  output$water_map_2 <- renderLeaflet({
+    
+    # tmap_mode("view")
+    map <- tm_basemap("CartoDB.Positron") +
+      tm_shape(hydro_reactive()) +
+      tm_fill("hr_name", alpha = 0.5, legend.show = FALSE) +
+      tm_polygons("hr_name", id = "hr_name", alpha = 0.1) 
+    
+    
+    tmap_leaflet(map)
+    
   })
 
   
@@ -256,7 +254,7 @@ Throughout the drought, many efforts were made to get residents to reduce their 
 <a href='https://www.waterboards.ca.gov/waterrights/water_issues/programs/drought/docs/ws_tools/guidance_estimate_res_gpcd.pdf' onclick='detect_click(this)'>here.</a></p>
 <br>
 <b>Raw datasets and metadata: </b> <img src='dwr.png', height='125px', style='float:right'/>
-<img src='pic6.png', height='125px', style='float:right'/>
+<img src='pic6_.png', height='125px', style='float:right'/>
 <br>
 - <a href='https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/conservation_reporting.html' onclick='detect_click(this)'>Water Conservation</a>
 <br>
@@ -264,11 +262,13 @@ Throughout the drought, many efforts were made to get residents to reduce their 
 <br>
 - <a href='http://atlas-dwr.opendata.arcgis.com/datasets/45d26a15b96346f1816d8fe187f8570d_0' onclick='detect_click(this)'>Water Districts (Spatial)</a>
 <br>
+- <a href='http://atlas-dwr.opendata.arcgis.com/datasets/2a572a181e094020bdaeb5203162de15_0'>Hydrological Regions (Spatial)</a>
 <br>
 <br>
 <br>
-<b>
-References:</b><br>
+<br>
+<b>References:</b>
+<br>
 Gomberg, Max et al. 2019. Water Conservation and Production Reports. California State Water Resources Control Board. 
 <br>
 <a href='https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/conservation_reporting.html' onclick='detect_click(this)'>Website</a>
@@ -277,8 +277,17 @@ Department of Water Resources Atlas. 2019. Water Districts. CA Department of Wat
 <br>
 <a href='http://atlas-dwr.opendata.arcgis.com/datasets/45d26a15b96346f1816d8fe187f8570d_0' onclick='detect_click(this)'>Website</a>
 <br>
-<br>"
-    })
+<br>
+<b>Photo Credit:</b>
+<br>
+Patrick T. Fallon.
+<a href='https://www.gettyimages.com/photos/patrick-t.-fallon?mediatype=photography&phrase=patrick%20t.%20fallon&sort=mostpopular'>Getty Images.</a>
+<br>
+Allison Horst. UCSB Bren School.
+<br>
+<br>
+<br>
+  " })
     output$tab4 <- renderText({"
     <h1>App Developers  <img src='206.png', height='55px', style=''/><img src='244.png', height='60px', style=''/></h1>
     <br>

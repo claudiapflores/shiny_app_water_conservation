@@ -96,11 +96,13 @@ water_total <-  merge(water_conservation,water_supplier_spatial, by = "supplier_
     dplyr::rename("Population Served" = total_population_served)
 
 # Read in ca_counties spatial data
-
 ca_counties <- read_sf(dsn = here::here("CA_Counties"), layer = "CA_Counties_TIGER2016") %>%
   st_transform(crs = 4326) %>% 
   select(NAME)
 
+# Hydrologic regions data with proper shapefiles
+hydrologic_spatial <- read_sf(dsn = here::here("spatial_data_hydrologic"), layer = "Hydrologic_Regions") %>%
+  clean_names() 
 
 ```
 
