@@ -43,8 +43,8 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
       )),
   tabPanel("Hydrological Regions",
            sidebarPanel(
-             checkboxGroupInput(inputId = "hydrologic_region",
-                          label = "Choose One or More Hydrologic Region:",
+             radioButtons(inputId = "hydrologic_region",
+                          label = "Choose One Hydrologic Region:",
                           choices = c(unique(water_merged$hydrologic_region)),
                           selected = "South Lahontan"),
              #sliderInput(inputId = "date_select_year",
@@ -216,13 +216,14 @@ server <- function(input, output) {
   
   output$water_map_static <- renderPlot({
     
-    ggplot(hydrologic_spatial()) +
+    ggplot(hydrologic_spatial) +
       geom_sf(data = ca_counties,
               size = 0.1,
               color = "black") +
       geom_sf(aes(fill = hr_name),
               alpha = 0.4) +
-      theme_bw()
+      theme_void() 
+      
     
   })
 

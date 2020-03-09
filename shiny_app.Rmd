@@ -103,18 +103,27 @@ ca_counties <- read_sf(dsn = here::here("CA_Counties"), layer = "CA_Counties_TIG
 # Hydrologic regions data with proper shapefiles
 hydrologic_spatial <- read_sf(dsn = here::here("spatial_data_hydrologic"), layer = "Hydrologic_Regions") %>%
   clean_names() %>% 
+  #rename("Hydrologic Region" = hr_name) %>% 
   st_as_sf() %>% 
   st_transform(crs = 4326)
 
 # Hydrologic static map test:
 
-ggplot(ca_counties) +
-  geom_sf(color = "black",
-          size = 0.1) +
-  geom_sf(data = hydrologic_spatial,
-          aes(fill = hr_name),
-          alpha = 0.4) +
-  theme_void() 
+#ggplot(ca_counties) +
+ # geom_sf(color = "black",
+  #        size = 0.1) +
+  #geom_sf(data = hydrologic_spatial,
+   #       aes(fill = hr_name),
+    #      alpha = 0.4) +
+  #theme_void() 
+
+#ggplot(hydrologic_spatial) +
+ #     geom_sf(data = ca_counties,
+  #            size = 0.1,
+   #           color = "black") +
+    #  geom_sf(aes(fill = 'Hydrologic Region'),
+     #         alpha = 0.4) +
+      #theme_void()
   
 ```
 
