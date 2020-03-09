@@ -19,14 +19,17 @@ library(ggthemes)
 ### User Interface
 
 ui <- navbarPage("Understanding California Municipal Water Supply and Use",
-  theme = shinytheme("superhero"),
+  theme = shinytheme("flatly"),
   tabPanel("User Information",
-           mainPanel(
-             HTML('<center><img src="pic3.jpg", height="350px"/></center>'),
+           mainPanel(width = 20,
+             HTML('<center><img src="pic4.jpg", height="350px"/></center>'),
              htmlOutput("tab1"),
-             HTML('<img src="bren.png", height="150px"/>'),
-           )),
-  tabPanel("Water Supplier Results",
+             HTML('<br>
+                  <br>'),
+             HTML('<img src="bren.png", height="125px", style="float:left"/>'),
+             HTML('<br>
+                  <br>'))),
+  tabPanel("Water Suppliers",
     sidebarPanel(
                  selectInput(inputId = "supplier_select",
                              label = "Choose a Supplier:",
@@ -38,7 +41,7 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
                HTML('<b>Residential Gallons Per Capita Day Water Use From April 2015 to September 2019</b>'),
                plotOutput(outputId = "per_capita_use")
       )),
-  tabPanel("Hydrological Region Results",
+  tabPanel("Hydrological Regions",
            sidebarPanel(
              checkboxGroupInput(inputId = "hydrologic_region",
                           label = "Choose One or More Hydrologic Region:",
@@ -61,16 +64,16 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
              gt_output(outputId = "datetable"),
              leafletOutput(outputId = "water_map_2")
            )),
-  tabPanel("Background Information",
-           mainPanel(
+  tabPanel("Background",
+           mainPanel(width = 20,
              htmlOutput("tab2")
            )),
   tabPanel("Data",
-           mainPanel(
+           mainPanel(width = 20,
              htmlOutput("tab3")
            )),
   tabPanel("App Developers",
-           mainPanel(
+           mainPanel(width = 20,
              htmlOutput("tab4")
            ))
   
@@ -211,10 +214,32 @@ server <- function(input, output) {
   # text for tabs
   {
     output$tab1 <- renderText({
-      "insert text for user information"
+      "<br>
+      <p> 
+      Understanding residential water use in California is vital to understand the sustainable management of water. This application uses reported water conservation data to visualize residential water use and behavior from April 2015 to September 2019.<br>
+      <br>
+      <b>Water Suppliers:</b>
+      <br>
+      <img src='pic9.png', height='300px', style='float:right'/>
+      From the dropdown menu, choose a supplier from the 406 suppliers listed to plot the service area of the supplier on the interactive map. Click on the service area polygon to view population served of the supplier. Additionally, visualize the residential gallons per capita day water use for each water supplier from April 2015 to September 2019.<br>
+      <br>
+      <b>Hydrologic Regions:</b>
+      <br>
+      Select one or more hydrologic regions in California to view the total annual amount of: water waste complaints or violation of conservation rules received by suppliers, follow-up activities by the suppliers to the water waste complaints or violation of conservation rules, and warnings issued by the suppliers to residential customers. The static map displays where each hydrologic region is located in the state.
+      </p>
+      <br>
+      <b>Background:</b>
+      <br>
+      Due to expected frequent and prolonged droughts, California continues to develop policy to sustainably manage waters of the state. Read about the policy (and inspiration) behind the creation of this application. 
+      </p>
+      <b>Data and App Developers:</b>
+      <br>
+      Learn about the source of data used to create this application and the team behind the screen.
+      </p>
+      <br>"
     })
     output$tab2 <- renderText({
-      "<h1>Background Information</h1>
+      "<h1>Background</h1>
       <br>
       <center><img src='pic2.jpg', height='450px', style=''/></center>
       <br>
@@ -250,11 +275,12 @@ Throughout the drought, many efforts were made to get residents to reduce their 
       <br>
       <center><img src='pic1.jpg', height='450px', style=''/></center>
       <br>
-      <p>The water conservation data used for this project is from the California State Water Resources Control Board and the spatial data is from the California Department of Water Resources. The California State Water Resources Control Board collected data from June 2014 to November 2019 from 409 municipalities. All conversions for the conservation data were completed by the State Water Board and can be viewed
+      <p>The water conservation data used for this application is from the California State Water Resources Control Board and the spatial data is from the California Department of Water Resources. The California State Water Resources Control Board collected data from April 2015 to November 2019 from 409 municipalities. All conversions for the conservation data were completed by the State Water Board. The methodology can be viewed
 <a href='https://www.waterboards.ca.gov/waterrights/water_issues/programs/drought/docs/ws_tools/guidance_estimate_res_gpcd.pdf' onclick='detect_click(this)'>here.</a></p>
 <br>
-<b>Raw datasets and metadata: </b> <img src='dwr.png', height='125px', style='float:right'/>
-<img src='pic6_.png', height='125px', style='float:right'/>
+<b>Raw datasets and metadata:</b> 
+<img src='pic7.jpg', height='150px', style='float:right'/>
+<img src='dwr.png', height='150px', style='float:right'/>
 <br>
 - <a href='https://www.waterboards.ca.gov/water_issues/programs/conservation_portal/conservation_reporting.html' onclick='detect_click(this)'>Water Conservation</a>
 <br>
