@@ -178,16 +178,14 @@ server <- function(input, output) {
       geom_col(color = "blue", 
                fill = "blue", 
                alpha = 0.5) +
-      # geom_line(color = "firebrick") +
-      #theme(axis.text.x = element_text(angle = 90, 
-                                      # hjust = 1, 
-                                      # vjust = 0.5)) +
-      theme_classic() +
+      theme_bw() +
       theme(axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 15))) +
       theme(axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 15, l = 0))) +
       labs(title = "",
            x = "Month and Year",
            y = "Gallons Per Capita Day Water Use") 
+      #scale_x_continuous(breaks = seq(from = 2015, to = 2019, by = 1))
+      
   })
   
   # hydrologic region map code below
