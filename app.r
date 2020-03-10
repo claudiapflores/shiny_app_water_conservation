@@ -41,7 +41,7 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
                HTML('<b>Residential Gallons Per Capita Day Water Use From April 2015 to September 2019</b>'),
                plotOutput(outputId = "per_capita_use")
       )),
-  tabPanel("Hydrological Regions",
+  tabPanel("Hydrologic Regions",
            sidebarPanel(
              radioButtons(inputId = "hydrologic_region",
                           label = "Choose One Hydrologic Region:",
