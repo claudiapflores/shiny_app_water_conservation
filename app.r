@@ -260,7 +260,8 @@ server <- function(input, output) {
       <br>
       <center><img src='pic2.jpg', height='450px', style=''/></center>
       <br>
-      From 2011 to 2017, California experienced an intense, historical drought, which eventually imposed an executive order of a 25 percent reduction in statewide water usage (Executive Order B-29-2015). In 2014, the California State Water Resources Control Board introduced regulation for drought emergency water conservation. Water suppliers with more than 3,000 connections were required to submit monthly reports to the State Water Board that included residential gallons-used-per-capita, number of water days allowed, and whether the supplier was under mandatory restrictions. After November 2017, reporting to the State Water Board became voluntary. However, shortly after in May 2018, Governor Jerry Brown signed Senate Bill 606 and Assembly Bill 1668, which reauthorized the mandatory reporting. 
+      From 2011 to 2017, California experienced an intense, historical drought, which eventually imposed an executive order of a 25 percent reduction in statewide water usage (Executive Order B-29-2015). In 2014, the California State Water Resources Control Board introduced regulation for drought emergency water conservation. Water suppliers with more than 3,000 connections were required to submit monthly reports to the State Water Board that included residential gallons-used-per-capita, number of water days allowed, and whether the supplier was under mandatory restrictions. After November 2017, reporting to the State Water Board became voluntary. However, shortly after in May 2018, Governor Jerry Brown signed <a href='https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201720180SB606' onclick='detect_click(this)'>Senate Bill 606</a>     
+and <a href='https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201720180AB1668' onclick='detect_click(this)'>Assembly Bill 1668</a>, which reauthorized the mandatory reporting. 
 <br>
 <br>
 Throughout the drought, many efforts were made to get residents to reduce their water usage. Since declaring the end of the drought in April 2017, residential water use per capita has on average become stagnant. To promote and encourage a more water saving conscious lifestyle, Governor Jerry Brown continued the monitoring of wasteful water use practice through Executive Order B-40-17. Monitoring was first introduced in the drought emergency water conservation regulation in July 2014. The follow activities are prohibited: 
@@ -339,8 +340,10 @@ Allison Horst. UCSB Bren School.
          <img alt='LinkedIn'src='linkedin.png'
          width='25' height='25'></a>
          <br> 
-    <img src='claudia.jpg', height='300px', style='float:right'/> 
+    <img src='claudia.jpg', height='250px', style='float:right'/> 
     <p>Claudia graduated from the University of California, Los Angeles (UCLA) with a Bachelor of Science in Environmental Science and a concentration in Systems and Societies in 2017. As an undergraduate, Claudia interned with GlobeMed and Mpoma Community HIV/AIDS Initiative in Uganda to work on water access, sanitation, and hygiene projects. Claudia’s work in Uganda allowed her to develop an interest in policy and water resources. To continue to pursue her interests, Claudia worked with other organizations such as Los Angeles Waterkeeper, Heal the Bay’s Santa Monica Pier Aquarium, and the Southern California Wetlands Recovery Project. Upon graduating, she was a researcher for the Water Program at the UCLA Luskin Center for Innovation. Claudia worked on developing scenarios for a statewide drinking water assistance program for low-income households. After the Luskin Center, she worked at the Environmental Finance Center at the University of North Carolina, Chapel Hill, where she evaluated criteria required to receive principal forgiveness for the Georgia State Revolving Fund programs. At the Bren School, Claudia plans to find innovative and economically feasible solutions for water infrastructure maintenance and sustainable practices in water resource management.</p>
+    <br>
+    <br>
     <br>
     <br>
 <b>Alex Milward</b>
@@ -348,15 +351,17 @@ Allison Horst. UCSB Bren School.
          <img alt='LinkedIn'src='linkedin.png'
          width='25' height='25'></a>
          <br> 
-<img src='alex.jpg', height='300px', style='float:right'/>
+<img src='alex.jpg', height='250px', style='float:right'/>
       <p>Alex Milward grew up in a small, rural town on the west side of California’s Sierra Nevada Mountains.  Here he enjoyed an immersion in nature and developed a passion for the natural world.  However, he was also witness to the environmental degradation that often accompanies an area rich in natural resources such as timber and water.  This led to a desire to pursue a career in environmental science and sustainability. Alex carried this passion to his undergraduate studies at the University of California, Santa Barbara, where he received a Bachelor of Science in Environmental Studies and Physical Geography in 2018. At UCSB, Alex conducted research alongside Dr. Jennifer King on wetland habitat restoration and its capacity to sequester atmospheric gases.  With this research came a curiosity of the influence that water was has on wetland habitats and the environment at large.  At Bren, Alex is specializing in water resources management, with a focus in environmental data science.  His goal is to analyze watersheds in the American west and develop new sustainability methods in regards to water appropriation, storage, and distribution to ensure the conservation of such a critical resource.</p>
+      <br>
+      <br>
       <br>
       <br>
 <b>Derek Nguyen</b>
 <a href='https://www.linkedin.com/in/derek-nguyen-7483b010b/'>
          <img alt='LinkedIn'src='linkedin.png'
          width='25' height='25'></a>
-           <br> <img src='derek.jpg', height='300px', style='float:right'/>
+           <br> <img src='derek.jpg', height='250px', style='float:right'/>
       <p>Derek Nguyen graduated from the University of California, Santa Barbara in 2019 with a Bachelor of Arts in Environmental Studies. During his undergraduate career, Derek conducted research on dry groundwater wells in the Western 17 states. His research helped to measure other locations potentially experiencing impacts from groundwater depletion. Derek also served as the Food Recovery Project Coordinator of UCSB’s Sustainability Program where he developed and implemented food recovery programs on-campus to reduce food waste and food insecurity within the student body. Derek is currently an intern at the Goleta Water District where he assists the Engineering Department in collecting and analyzing water quality samples from various water zones within the district. Derek wants to specialize in Water Resources Management with afocus in Environmental Data Science to learn more about water use efficiency and demand management. He aspires to promote equity and resiliency of water systems especially in underserved communities.</p>
       <br>
       <br>
