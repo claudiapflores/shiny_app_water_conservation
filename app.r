@@ -14,6 +14,8 @@ library(sf)
 library(kableExtra)
 library(gt)
 library(ggthemes)
+library(plotly)
+library(ggplot2)
 
 
 ### User Interface
@@ -183,7 +185,7 @@ server <- function(input, output) {
       theme(axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 15, l = 0))) +
       labs(title = "",
            x = "Month and Year",
-           y = "Gallons Per Capita Day Water Use") 
+           y = "Gallons Per Capita Day Water Use")
       
   })
   
