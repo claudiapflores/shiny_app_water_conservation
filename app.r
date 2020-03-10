@@ -184,7 +184,6 @@ server <- function(input, output) {
       labs(title = "",
            x = "Month and Year",
            y = "Gallons Per Capita Day Water Use") 
-      #scale_x_continuous(breaks = seq(from = 2015, to = 2019, by = 1))
       
   })
   
