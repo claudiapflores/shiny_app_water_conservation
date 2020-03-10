@@ -62,10 +62,10 @@ ui <- navbarPage("Understanding California Municipal Water Supply and Use",
            ),
            mainPanel(
              gt_output(outputId = "datetable"),
-             #leafletOutput(outputId = "water_map_2")
+             leafletOutput(outputId = "water_map_2")
              
              #static map output (uncheck to see)
-              plotOutput(outputId = "water_map_static")
+              #plotOutput(outputId = "water_map_static")
            )),
   tabPanel("Background",
            mainPanel(width = 20,
