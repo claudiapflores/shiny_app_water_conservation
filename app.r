@@ -174,13 +174,13 @@ server <- function(input, output) {
   # reactive plot reactive plot for per capita usage
   output$per_capita_use <- renderPlot({
     ggplot(data = per_capita_use_reactive(), 
-           aes(x = new_date, 
+           aes(x = yy_mm_dd, 
                y = reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014)) +
       geom_col(color = "blue", 
                fill = "blue", 
                alpha = 0.5) +
       theme_bw() +
-      theme(axis.text.x = element_text(angle = 90, hjust = 0.5)) +
+      #theme(axis.text.x = element_text(angle = 90, hjust = 0.5)) +
       theme(axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 15))) +
       theme(axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 15, l = 0))) +
       labs(title = "",
