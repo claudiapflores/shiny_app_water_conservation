@@ -125,6 +125,11 @@ hydrologic_spatial <- read_sf(dsn = here::here("spatial_data_hydrologic"), layer
      #         alpha = 0.4) +
       #theme_void()
   
+
+
+# Adding a column to merge dates that were separated. 
+water_merged <- water_merged %>%
+  unite(new_date, month, year, sep = " ")
 ```
 
 

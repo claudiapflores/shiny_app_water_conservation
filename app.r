@@ -20,7 +20,7 @@ library(ggplot2)
 
 ### User Interface
 
-ui <- navbarPage("Understanding California Municipal Water Supply and Use",
+ui <- navbarPage("Understanding California Residential Water Use",
   theme = shinytheme("flatly"),
   tabPanel("User Information",
            mainPanel(width = 20,
@@ -152,7 +152,7 @@ server <- function(input, output) {
       cols_label(
         hydrologic_region = md("**Hydrologic Region**"),
         tot_complaints = md("**Total Complaints**"),
-        follow_ups = md("**Follow Ups**"),
+        follow_ups = md("**Total Follow Ups**"),
         tot_warnings = md("**Total Warnings**")
       ) %>% 
       cols_align(
@@ -167,20 +167,20 @@ server <- function(input, output) {
     water_merged %>% 
       select(supplier_name, 
              yy_mm_dd, 
-             reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014) %>% 
+             reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014, new_date) %>% 
       filter(supplier_name == input$supplier_select)
   })
   
   # reactive plot reactive plot for per capita usage
-
   output$per_capita_use <- renderPlot({
     ggplot(data = per_capita_use_reactive(), 
-           aes(x = yy_mm_dd, 
+           aes(x = new_date, 
                y = reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014)) +
       geom_col(color = "blue", 
                fill = "blue", 
                alpha = 0.5) +
       theme_bw() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 0.5)) +
       theme(axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 15))) +
       theme(axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 15, l = 0))) +
       labs(title = "",
