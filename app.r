@@ -40,7 +40,7 @@ ui <- navbarPage("Understanding California Residential Water Use",
     mainPanel(
                leafletOutput(outputId = "water_map"),
                HTML('<br>'),
-               HTML('<b>Residential Gallons Per Capita Day Water Use From April 2015 to September 2019</b>'),
+               HTML('<b>Residential Gallons Per Capita Day Water Use From June 2014 to September 2019</b>'),
                plotOutput(outputId = "per_capita_use")
       )),
   tabPanel("Hydrologic Regions",
@@ -57,9 +57,9 @@ ui <- navbarPage("Understanding California Residential Water Use",
                          #sep = ""),
              sliderInput("date_select", 
                          "Reporting Month and Year:", 
-                         min = as.Date("2015-04-01"), 
+                         min = as.Date("2014-06-01"), 
                          max = as.Date("2019-09-01"), 
-                         value = as.Date(c("2015-04-01","2019-09-01")), 
+                         value = as.Date(c("2014-06-01","2019-09-01")), 
                          timeFormat = "%b %Y"),
            ),
            mainPanel(
@@ -133,7 +133,7 @@ server <- function(input, output) {
         table.width = pct(100)
       ) %>%
       tab_footnote(
-        footnote = "By Hydrologic Region from 2015 - 2019",
+        footnote = "By Hydrologic Region from 2014 - 2019",
         location = cells_title()
       ) %>%
       tab_style(
@@ -233,12 +233,12 @@ server <- function(input, output) {
     output$tab1 <- renderText({
       "<br>
       <p> 
-      Understanding residential water use in California is vital to understand the sustainable management of water. This application uses reported water conservation data to visualize residential water use and behavior from April 2015 to September 2019.<br>
+      Understanding residential water use in California is vital to understand the sustainable management of water. This application uses reported water conservation data to visualize residential water use and behavior from June 2014 to September 2019.<br>
       <br>
       <b>Water Suppliers:</b>
       <br>
       <img src='pic9.png', height='300px', style='float:right'/>
-      From the dropdown menu, choose a supplier from the 406 suppliers listed to plot the service area of the supplier on the interactive map. Click on the service area polygon to view population served of the supplier. Additionally, visualize the residential gallons per capita day water use for each water supplier from April 2015 to September 2019.<br>
+      From the dropdown menu, choose a supplier from the 406 suppliers listed to plot the service area of the supplier on the interactive map. Click on the service area polygon to view population served of the supplier. Additionally, visualize the residential gallons per capita day water use for each water supplier from June 2014 to September 2019.<br>
       <br>
       <b>Hydrologic Regions:</b>
       <br>
@@ -293,7 +293,7 @@ Throughout the drought, many efforts were made to get residents to reduce their 
       <br>
       <center><img src='pic1.jpg', height='450px', style=''/></center>
       <br>
-      <p>The water conservation data used for this application is from the California State Water Resources Control Board and the spatial data is from the California Department of Water Resources. The California State Water Resources Control Board collected data from April 2015 to November 2019 from 409 municipalities. All conversions for the conservation data were completed by the State Water Board. The methodology can be viewed
+      <p>The water conservation data used for this application is from the California State Water Resources Control Board and the spatial data is from the California Department of Water Resources. The California State Water Resources Control Board collected data from June 2014 to November 2019 from 409 municipalities. All conversions for the conservation data were completed by the State Water Board. The methodology can be viewed
 <a href='https://www.waterboards.ca.gov/waterrights/water_issues/programs/drought/docs/ws_tools/guidance_estimate_res_gpcd.pdf' onclick='detect_click(this)'>here.</a></p>
 <br>
 <b>Raw datasets and metadata:</b> 
