@@ -118,7 +118,7 @@ server <- function(input, output) {
         tot_complaints = sum(complaints_received),
         follow_ups = sum(follow_up_actions),
         tot_warnings = sum(warnings_issued)
-      )
+        )
   })
   
   # reactive table
@@ -171,7 +171,7 @@ server <- function(input, output) {
       filter(supplier_name == input$supplier_select)
   })
   
-  # reactive plot reactive plot for per capita usage
+  # reactive plot for per capita usage
   output$per_capita_use <- renderPlot({
     ggplot(data = per_capita_use_reactive(), 
            aes(x = yy_mm_dd, 

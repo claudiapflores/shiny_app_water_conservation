@@ -57,7 +57,7 @@ beep(12)
 # Remove white spaces in and from both sides of text for supplier_name column in both datafames.
 water_supplier_clean <- water_supplier_clean %>% 
   mutate(supplier_name = stringr::str_squish(supplier_name)) %>% 
-  mutate(supplier_name = stringr::str_to_title(supplier_name))
+  mutate(supplier_name = stringr::str_to_title(supplier_name)) 
 
 water_conservation <- water_conservation %>% 
   mutate(supplier_name = stringr::str_squish(supplier_name)) %>% 
