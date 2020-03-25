@@ -211,7 +211,8 @@ server <- function(input, output) {
     tmap_leaflet(map)
     
   })
-  # static map for hydrologic region
+   
+   #static map for hydrologic region
   
   output$water_map_static <- renderPlot({
     
@@ -222,7 +223,7 @@ server <- function(input, output) {
       geom_sf(aes(fill = hr_name),
               alpha = 0.4) +
       theme_void() +
-      labs(fill = "Hydrologic Region")
+     labs(fill = "Hydrologic Region")
       
     
   })
