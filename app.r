@@ -59,6 +59,7 @@ ui <- navbarPage("Understanding California Residential Water Use",
                          "Reporting Month and Year:", 
                          min = as.Date("2014-06-01"), 
                          max = as.Date("2019-09-01"), 
+                         #value = as.Date("2014-06-01"),
                          value = as.Date(c("2014-06-01","2019-09-01")), 
                          timeFormat = "%b %Y"),
            ),
@@ -111,14 +112,14 @@ server <- function(input, output) {
   # reactive table code below
   # reactive table dataframe
   datetable <- reactive({
-    water_merged %>%
+    water_merged_date %>%
       filter(yy_mm_dd == input$date_select, hydrologic_region == input$hydrologic_region) %>%
       group_by(hydrologic_region) %>%
       summarize(
-        tot_complaints = sum(complaints_received),
-        follow_ups = sum(follow_up_actions),
-        tot_warnings = sum(warnings_issued)
-        )
+      tot_complaints = sum(complaints_received, na.rm = TRUE),
+      follow_ups = sum(follow_up_actions, na.rm = TRUE),
+      tot_warnings = sum(warnings_issued, na.rm = TRUE)
+    )
   })
   
   # reactive table
