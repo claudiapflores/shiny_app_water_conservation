@@ -124,6 +124,10 @@ hydrologic_spatial <- read_sf(dsn = here::here("spatial_data_hydrologic"), layer
 # Adding a column to merge dates that were separated. 
 water_merged <- water_merged %>%
   unite(new_date, month, year, sep = " ")
+
+# Made a dataframe to change yy_mm_dd to date class.
+water_merged_date <-water_merged %>% 
+  mutate_if(is.POSIXt, as.Date)
 ```
 
 

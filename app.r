@@ -164,7 +164,7 @@ server <- function(input, output) {
   # reactive plot for per capita usage code below
   # reactive plot for per capita usage dataframe
   per_capita_use_reactive <- reactive({
-    water_merged %>% 
+    water_merged_date %>% 
       select(supplier_name, 
              yy_mm_dd, 
              reported_residential_gallons_per_capita_day_r_gpcd_starting_in_september_2014, new_date) %>% 
@@ -180,7 +180,8 @@ server <- function(input, output) {
                fill = "blue", 
                alpha = 0.5) +
       theme_bw() +
-      #theme(axis.text.x = element_text(angle = 90, hjust = 0.5)) +
+      theme(axis.text.x = element_text(angle = 90, hjust = 0.5)) +
+      scale_x_date(date_breaks= '2 months', date_labels = "%b %Y") +
       theme(axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 15))) +
       theme(axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 15, l = 0))) +
       labs(title = "",
