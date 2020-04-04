@@ -49,19 +49,19 @@ ui <- navbarPage("Understanding California Residential Water Use",
                           label = "Choose One Hydrologic Region:",
                           choices = c(unique(water_merged$hydrologic_region)),
                           selected = "South Lahontan"),
-             #sliderInput(inputId = "date_select_year",
-                         #label = "Select Year", 
-                         #min = 2015, 
-                         #max = 2019, 
-                         #value = c(2015, 2019), 
-                         #sep = ""),
-             sliderInput("date_select", 
-                        "Reporting Month and Year:", 
-                        min = as.Date("2014-06-01"), 
-                        max = as.Date("2019-09-01"), 
-                        # value = as.Date("2014-06-01"),
-                        value = as.Date(c("2014-06-01","2019-09-01")), 
-                        timeFormat = "%b %Y"),
+             sliderInput(inputId = "date_select_year",
+                         label = "Select Year", 
+                         min = 2014, 
+                         max = 2019, 
+                         value = 2019, 
+                         sep = ""),
+             #sliderInput("date_select", 
+                        #"Reporting Month and Year:", 
+                        #min = as.Date("2014-06-01"), 
+                        #max = as.Date("2019-09-01"), 
+                       ## value = as.Date("2014-06-01"),
+                        #value = as.Date(c("2014-06-01","2019-09-01")), 
+                        #timeFormat = "%b %Y"),
            ),
            mainPanel(
              gt_output(outputId = "datetable"),
@@ -112,9 +112,9 @@ server <- function(input, output) {
   # reactive table code below
   # reactive table dataframe
   datetable <- reactive({
-    water_merged_date %>%
-      filter(yy_mm_dd == input$date_select, hydrologic_region == input$hydrologic_region) %>%
-      group_by(hydrologic_region) %>%
+    water_merged_month %>%
+      filter(year == input$date_select_year, hydrologic_region == input$hydrologic_region) %>%
+      group_by(hydrologic_region,year) %>%
       summarize(
       tot_complaints = sum(complaints_received, na.rm = TRUE),
       follow_ups = sum(follow_up_actions, na.rm = TRUE),
